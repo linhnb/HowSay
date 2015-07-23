@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		823BC0D91B5F7334007B3957 /* HowSayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0D81B5F7334007B3957 /* HowSayTests.swift */; };
 		823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0E41B5F7496007B3957 /* AppDelegate.swift */; };
+		828E1E561B607FC80024D784 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E1E541B607FC80024D784 /* DetailVC.swift */; };
+		828E1E571B607FC80024D784 /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828E1E551B607FC80024D784 /* DetailVC.xib */; };
+		828E1E5B1B6080330024D784 /* DetailVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828E1E591B6080330024D784 /* DetailVC_iPad.xib */; };
 		82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CE81B60793A00B733EC /* HomeVC.swift */; };
 		82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3CE91B60793A00B733EC /* HomeVC.xib */; };
 		82BD3CF31B60833700B733EC /* HomeVC_IPAD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CF11B60833700B733EC /* HomeVC_IPAD.swift */; };
@@ -42,6 +45,9 @@
 		823BC0D71B5F7334007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0D81B5F7334007B3957 /* HowSayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowSayTests.swift; sourceTree = "<group>"; };
 		823BC0E41B5F7496007B3957 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		828E1E541B607FC80024D784 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		828E1E551B607FC80024D784 /* DetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		828E1E591B6080330024D784 /* DetailVC_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailVC_iPad.xib; sourceTree = "<group>"; };
 		82BD3CE81B60793A00B733EC /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		82BD3CE91B60793A00B733EC /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		82BD3CF01B60823F00B733EC /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -197,6 +203,9 @@
 		823BC0EB1B5F7496007B3957 /* DetailVC */ = {
 			isa = PBXGroup;
 			children = (
+				828E1E541B607FC80024D784 /* DetailVC.swift */,
+				828E1E551B607FC80024D784 /* DetailVC.xib */,
+				828E1E591B6080330024D784 /* DetailVC_iPad.xib */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -380,11 +389,16 @@
 			files = (
 				82BD3CFE1B60A8F100B733EC /* HomeCell.xib in Resources */,
 				82C68E9D1B5F7716004C6AA8 /* LaunchScreen.xib in Resources */,
+				828E1E5B1B6080330024D784 /* DetailVC_iPad.xib in Resources */,
 				82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */,
 				82BD3CF41B60833700B733EC /* HomeVC_IPAD.xib in Resources */,
 				82C68EA51B5F7736004C6AA8 /* Images.xcassets in Resources */,
 				82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */,
+<<<<<<< HEAD
 				82BD3CFA1B608EB600B733EC /* CircleImage.xib in Resources */,
+=======
+				828E1E571B607FC80024D784 /* DetailVC.xib in Resources */,
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +423,11 @@
 				82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */,
 				823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */,
 				82C68EA31B5F772C004C6AA8 /* HowSay.xcdatamodeld in Sources */,
+<<<<<<< HEAD
+=======
+				823BC0C31B5F7333007B3957 /* HowSay.xcdatamodeld in Sources */,
+				828E1E561B607FC80024D784 /* DetailVC.swift in Sources */,
+>>>>>>> master
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +557,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HowSay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HowSay/Classes/Base/Defines/HowSay-Bridging_Header.h";
@@ -550,6 +570,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HowSay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HowSay/Classes/Base/Defines/HowSay-Bridging_Header.h";
