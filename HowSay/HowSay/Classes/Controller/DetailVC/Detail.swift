@@ -13,8 +13,7 @@ class Detail: UIView {
     @IBOutlet weak var imvImage: UIImageView!
     @IBOutlet weak var btnName: UIButton!
     
-    
-    
+
     
     @IBAction func namePlay(sender: AnyObject) {
         print("Play Audio")
