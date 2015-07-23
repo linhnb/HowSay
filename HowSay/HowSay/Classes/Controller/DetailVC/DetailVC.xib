@@ -6,6 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="HowSay" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="xKP-da-dte" id="mEe-6V-RN8"/>
+                <outlet property="playButton" destination="sOX-OV-pWa" id="3An-pG-bC1"/>
+                <outlet property="repeatButton" destination="asw-p1-j5g" id="5kL-0j-umH"/>
+                <outlet property="scrollContent" destination="S6X-fj-FSa" id="oG4-GN-8qc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -45,27 +49,45 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOX-OV-pWa">
-                            <rect key="frame" x="262" y="192" width="44" height="44"/>
-                            <state key="normal" image="ic_play">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                     </subviews>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tB8-Cj-dnp">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tB8-Cj-dnp" userLabel="Next">
                     <rect key="frame" x="514" y="145" width="44" height="44"/>
                     <state key="normal" image="ic_next">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="nextTouch:" destination="-1" eventType="touchUpInside" id="qsf-Lr-12P"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgS-9l-NnR">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xKP-da-dte" userLabel="Back">
+                    <rect key="frame" x="10" y="272" width="44" height="44"/>
+                    <state key="normal" image="ic_repeat">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="repeatTouch:" destination="-1" eventType="touchUpInside" id="Ll3-It-1nd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOX-OV-pWa" userLabel="Play">
+                    <rect key="frame" x="262" y="272" width="44" height="44"/>
+                    <state key="normal" image="ic_play">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="playTouch:" destination="-1" eventType="touchUpInside" id="XfB-br-9b7"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CgS-9l-NnR" userLabel="Pre">
                     <rect key="frame" x="10" y="145" width="44" height="44"/>
                     <state key="normal" image="ic_previously">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="preTouch:" destination="-1" eventType="touchUpInside" id="k4g-d8-UyO"/>
+                    </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asw-p1-j5g">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asw-p1-j5g" userLabel="Repeat">
                     <rect key="frame" x="514" y="275" width="44" height="44"/>
                     <state key="normal" image="ic_repeat">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,7 +97,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="529" y="471"/>
+            <point key="canvasLocation" x="526" y="415"/>
         </view>
     </objects>
     <resources>

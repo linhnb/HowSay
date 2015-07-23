@@ -9,6 +9,16 @@
 import UIKit
 
 class DetailVC: UIViewController {
+    
+    @IBOutlet weak var scrollContent: UIScrollView!
+    
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var repeatButton: UIButton!
+    
+    @IBOutlet weak var backButton: UIButton!
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +32,18 @@ class DetailVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func preTouch(sender: AnyObject) {
+        
     }
-    */
+    @IBAction func playTouch(sender: AnyObject) {
+        
+    }
+    @IBAction func nextTouch(sender: AnyObject) {
+        
+    }
+    @IBAction func repeatTouch(sender: AnyObject) {
+        
+    }
 
 }
