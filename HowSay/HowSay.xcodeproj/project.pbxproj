@@ -20,6 +20,12 @@
 		82BD3D021B60B55000B733EC /* DetailVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3CFF1B60B55000B733EC /* DetailVC_iPad.xib */; };
 		82BD3D031B60B55000B733EC /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D001B60B55000B733EC /* DetailVC.swift */; };
 		82BD3D041B60B55000B733EC /* DetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D011B60B55000B733EC /* DetailVC.xib */; };
+		82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D051B60D56600B733EC /* AddNewCell.swift */; };
+		82BD3D081B60D56600B733EC /* AddNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D061B60D56600B733EC /* AddNewCell.xib */; };
+		82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D0A1B60DB4200B733EC /* AddView.swift */; };
+		82BD3D0D1B60DB5100B733EC /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D0C1B60DB5100B733EC /* AddView.xib */; };
+		82BD3D111B60DBD700B733EC /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */; };
+		82BD3D121B60DBD700B733EC /* AddNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D101B60DBD700B733EC /* AddNewVC.xib */; };
 		82C68E9D1B5F7716004C6AA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C68E971B5F7716004C6AA8 /* LaunchScreen.xib */; };
 		82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C68E991B5F7716004C6AA8 /* Main.storyboard */; };
 		82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C68E9C1B5F7716004C6AA8 /* ViewController.swift */; };
@@ -58,6 +64,12 @@
 		82BD3CFF1B60B55000B733EC /* DetailVC_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailVC_iPad.xib; sourceTree = "<group>"; };
 		82BD3D001B60B55000B733EC /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		82BD3D011B60B55000B733EC /* DetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailVC.xib; sourceTree = "<group>"; };
+		82BD3D051B60D56600B733EC /* AddNewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewCell.swift; sourceTree = "<group>"; };
+		82BD3D061B60D56600B733EC /* AddNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewCell.xib; sourceTree = "<group>"; };
+		82BD3D0A1B60DB4200B733EC /* AddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		82BD3D0C1B60DB5100B733EC /* AddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
+		82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
+		82BD3D101B60DBD700B733EC /* AddNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewVC.xib; sourceTree = "<group>"; };
 		82C68E981B5F7716004C6AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		82C68E9A1B5F7716004C6AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		82C68E9C1B5F7716004C6AA8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +206,7 @@
 		823BC0EA1B5F7496007B3957 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				82BD3D0E1B60DBC000B733EC /* AddNewVC */,
 				823BC0EB1B5F7496007B3957 /* DetailVC */,
 				823BC0EC1B5F7496007B3957 /* HomeVC */,
 			);
@@ -227,6 +240,8 @@
 			children = (
 				82BD3CFB1B60A8F100B733EC /* HomeCell.swift */,
 				82BD3CFC1B60A8F100B733EC /* HomeCell.xib */,
+				82BD3D051B60D56600B733EC /* AddNewCell.swift */,
+				82BD3D061B60D56600B733EC /* AddNewCell.xib */,
 			);
 			path = HomeCell;
 			sourceTree = "<group>";
@@ -241,17 +256,10 @@
 		823BC0EF1B5F7496007B3957 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				82BD3D091B60DB0B00B733EC /* AddView */,
 				82BD3CF61B608D5F00B733EC /* CircleImage */,
-				823BC0F01B5F7496007B3957 /* AddView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		823BC0F01B5F7496007B3957 /* AddView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AddView;
 			sourceTree = "<group>";
 		};
 		823BC0F11B5F7496007B3957 /* Resoursce */ = {
@@ -295,6 +303,24 @@
 				82BD3CF91B608EB600B733EC /* CircleImage.xib */,
 			);
 			path = CircleImage;
+			sourceTree = "<group>";
+		};
+		82BD3D091B60DB0B00B733EC /* AddView */ = {
+			isa = PBXGroup;
+			children = (
+				82BD3D0A1B60DB4200B733EC /* AddView.swift */,
+				82BD3D0C1B60DB5100B733EC /* AddView.xib */,
+			);
+			path = AddView;
+			sourceTree = "<group>";
+		};
+		82BD3D0E1B60DBC000B733EC /* AddNewVC */ = {
+			isa = PBXGroup;
+			children = (
+				82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */,
+				82BD3D101B60DBD700B733EC /* AddNewVC.xib */,
+			);
+			path = AddNewVC;
 			sourceTree = "<group>";
 		};
 		82C68E961B5F7716004C6AA8 /* Base.lproj */ = {
@@ -389,12 +415,15 @@
 			files = (
 				82BD3CFE1B60A8F100B733EC /* HomeCell.xib in Resources */,
 				82BD3D041B60B55000B733EC /* DetailVC.xib in Resources */,
+				82BD3D081B60D56600B733EC /* AddNewCell.xib in Resources */,
 				82C68E9D1B5F7716004C6AA8 /* LaunchScreen.xib in Resources */,
 				82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */,
 				82BD3D021B60B55000B733EC /* DetailVC_iPad.xib in Resources */,
 				82BD3CF41B60833700B733EC /* HomeVC_IPAD.xib in Resources */,
 				82C68EA51B5F7736004C6AA8 /* Images.xcassets in Resources */,
 				82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */,
+				82BD3D121B60DBD700B733EC /* AddNewVC.xib in Resources */,
+				82BD3D0D1B60DB5100B733EC /* AddView.xib in Resources */,
 				82BD3CFA1B608EB600B733EC /* CircleImage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,11 +442,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */,
 				82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */,
+				82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */,
 				82BD3CFD1B60A8F100B733EC /* HomeCell.swift in Sources */,
 				82BD3CF31B60833700B733EC /* HomeVC_IPAD.swift in Sources */,
 				82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */,
 				82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */,
+				82BD3D111B60DBD700B733EC /* AddNewVC.swift in Sources */,
 				82BD3D031B60B55000B733EC /* DetailVC.swift in Sources */,
 				823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */,
 				82C68EA31B5F772C004C6AA8 /* HowSay.xcdatamodeld in Sources */,

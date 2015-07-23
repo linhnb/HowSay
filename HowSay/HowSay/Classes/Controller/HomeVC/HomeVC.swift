@@ -8,9 +8,9 @@
 
 import UIKit
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-    var identifier = "cell"
-    
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate {
+    var identifier1 = "cell1"
+    var identifier2 = "cell2"
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,13 +18,22 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func loadViewBegin() {
-        let nibName  = UINib(nibName: "HomeCell", bundle: nil)
-        homeCollectionView.registerNib(nibName, forCellWithReuseIdentifier: identifier)
+        let nibNameNormal  = UINib(nibName: "HomeCell", bundle: nil)
+        homeCollectionView.registerNib(nibNameNormal, forCellWithReuseIdentifier: identifier1)
+        let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
+        homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
         
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+    func addNewCellDelegatePushToAddView() {
+        let rootVC = AddNewVC(nibName: "AddNewVC", bundle: nil)
+        self.navigationController?.pushViewController(rootVC, animated: false)
     }
     
 }
@@ -41,9 +50,16 @@ extension HomeVC {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! HomeCell
         
-        return cell
+        if (indexPath.item == 19){
+             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier2, forIndexPath: indexPath) as! AddNewCell
+            cell.delegate = self
+            return cell
+        } else {
+             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier1, forIndexPath: indexPath) as! HomeCell
+            return cell
+        }
+        
     }
     
     
