@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.backgroundColor = UIColor.whiteColor()
         let nav = UINavigationController()
         let rootVC = HomeVC(nibName: "HomeVC", bundle: nil)
+        nav.pushViewController(rootVC, animated: false)
         self.window?.rootViewController = nav
         self.window?.makeKeyAndVisible()
         nav.navigationBarHidden = true

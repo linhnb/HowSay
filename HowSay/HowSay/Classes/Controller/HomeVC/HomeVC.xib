@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="HowSay" customModuleProvider="target">
             <connections>
+                <outlet property="homeCollectionView" destination="qMp-Hi-uRL" id="pqi-vl-G6Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,9 +14,62 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_green" translatesAutoresizingMaskIntoConstraints="NO" id="uAx-Bw-2Jn">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDj-0i-FUu">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="PrP-UO-ARK">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="PrP-UO-ARK" firstAttribute="leading" secondItem="dDj-0i-FUu" secondAttribute="leading" id="Fqn-2Q-5rn"/>
+                        <constraint firstAttribute="height" constant="84" id="Gdj-3R-G1H"/>
+                        <constraint firstItem="PrP-UO-ARK" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="top" id="GoD-DO-oWr"/>
+                        <constraint firstAttribute="trailing" secondItem="PrP-UO-ARK" secondAttribute="trailing" id="Nfi-Jx-fHC"/>
+                        <constraint firstAttribute="bottom" secondItem="PrP-UO-ARK" secondAttribute="bottom" id="PIO-bL-skb"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qMp-Hi-uRL">
+                    <rect key="frame" x="0.0" y="84" width="568" height="236"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zx1-sU-jpZ">
+                        <size key="itemSize" width="92" height="92"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Rw6-ET-bJY"/>
+                        <outlet property="delegate" destination="-1" id="DiN-Ex-bFy"/>
+                    </connections>
+                </collectionView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="uAx-Bw-2Jn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1Dq-Yn-r0K"/>
+                <constraint firstItem="uAx-Bw-2Jn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4wc-fs-cn1"/>
+                <constraint firstAttribute="bottom" secondItem="qMp-Hi-uRL" secondAttribute="bottom" id="6Ie-FP-y5E"/>
+                <constraint firstItem="qMp-Hi-uRL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FVd-Ye-V6w"/>
+                <constraint firstItem="dDj-0i-FUu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IDH-ih-Zf2"/>
+                <constraint firstItem="dDj-0i-FUu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Lom-JC-z4a"/>
+                <constraint firstAttribute="trailing" secondItem="uAx-Bw-2Jn" secondAttribute="trailing" id="QKJ-d1-Mkp"/>
+                <constraint firstItem="qMp-Hi-uRL" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="bottom" id="TXH-4u-zMV"/>
+                <constraint firstAttribute="trailing" secondItem="qMp-Hi-uRL" secondAttribute="trailing" id="ba4-PO-8eE"/>
+                <constraint firstAttribute="bottom" secondItem="uAx-Bw-2Jn" secondAttribute="bottom" id="blu-uS-9PF"/>
+                <constraint firstAttribute="trailing" secondItem="dDj-0i-FUu" secondAttribute="trailing" id="tdb-Mc-R4b"/>
+            </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="330" y="230"/>
         </view>
     </objects>
+    <resources>
+        <image name="background_green" width="568" height="257"/>
+        <image name="background_top" width="568" height="84"/>
+    </resources>
 </document>
