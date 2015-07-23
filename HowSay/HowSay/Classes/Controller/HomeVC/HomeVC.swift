@@ -48,6 +48,7 @@ extension HomeVC {
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 }
