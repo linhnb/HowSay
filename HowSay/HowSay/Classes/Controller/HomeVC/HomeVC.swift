@@ -8,20 +8,46 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
-
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    var identifier = "cell"
+    
+    @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.loadViewBegin()
     }
-
+    
+    func loadViewBegin() {
+        let nibName  = UINib(nibName: "HomeCell", bundle: nil)
+        homeCollectionView.registerNib(nibName, forCellWithReuseIdentifier: identifier)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+}
 
+//MARK: - UICollectionViewDelegate
+
+extension HomeVC {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
-
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! HomeCell
+        
+        return cell
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+    }
 }
