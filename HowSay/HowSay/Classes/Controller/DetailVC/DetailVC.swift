@@ -52,7 +52,10 @@ import UIKit
     
     @IBAction func preTouch(sender: AnyObject) {
         print("pre touch")
+        nextButton.hidden = false
+        
         if position < 1 {
+            preButton.hidden = true
             return
         }
         position = position - 1
@@ -65,7 +68,9 @@ import UIKit
     }
     @IBAction func nextTouch(sender: AnyObject) {
         print("next touch")
+        preButton.hidden = false
         if position > 2 {
+            nextButton.hidden = true
             return
         }
         position = position + 1
@@ -81,23 +86,18 @@ import UIKit
     }
     
     // Scroll View Delegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        print("did end drag")
-        position = scrollView.contentOffset.x / viewContent.frame.size.width
-        
-        if position > 0 && position < 3 {
-            nextButton.hidden = false
-            preButton.hidden = false
-        }
-    }
-    
     func scrollViewDidScroll(scrollView: UIScrollView) {
         position = scrollView.contentOffset.x / viewContent.frame.size.width
+        
         if position == 0 {
             preButton.hidden = true
         }
         if position == 3 {
             nextButton.hidden = true
+        }
+        if position >= 1 && position <= 2 {
+            preButton.hidden = false
+            nextButton.hidden = false
         }
     }
     
