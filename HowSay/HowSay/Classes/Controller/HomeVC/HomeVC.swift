@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
     @IBOutlet weak var homeCollectionView: UICollectionView!
@@ -23,18 +23,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
         
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     override func prefersStatusBarHidden() -> Bool {
-        return false
+        return true
     }
     func addNewCellDelegatePushToAddView() {
         let rootVC = AddNewVC(nibName: "AddNewVC", bundle: nil)
         self.navigationController?.pushViewController(rootVC, animated: false)
     }
+    
     
 }
 
@@ -67,4 +69,12 @@ extension HomeVC {
         let detail = DetailVC(nibName: "DetailVC", bundle: nil)
         self.navigationController?.pushViewController(detail, animated: true)
     }
+    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        let heightSize = (collectionView.frame.size.height - 50)/2
+//        let size = CGSizeMake(heightSize, heightSize)
+//        
+//        return size
+//    }
+
 }

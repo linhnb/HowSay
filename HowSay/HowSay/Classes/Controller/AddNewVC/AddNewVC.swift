@@ -51,6 +51,9 @@ class AddNewVC: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(root, animated: false)
     }
     
+    @IBAction func touchBack(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(false)
+    }
     // Keyborad notification.
     func registerForKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWasShow:", name: UIKeyboardDidShowNotification, object: nil)
