@@ -23,29 +23,19 @@ class DetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.view.frame.size.width)
-        print(self.view.frame.size.height)
         
+
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         scrollContent.pagingEnabled = true
         scrollContent.contentSize = CGSize(width: self.view.frame.size.width * 4, height: viewContent.frame.size.height)
         for var i:CGFloat = 0; i < 4; i++ {
             var detail: Detail!
-            print(viewContent.frame.size.width*i)
             detail = NSBundle.mainBundle().loadNibNamed("Detail", owner: self, options: nil)[0] as! Detail
-//            switch i {
-//            case 1 :
-//                detail.frame = CGRectMake(0, 0, self.view.frame.size.width, viewContent.frame.size.height)
-//            case 2 :
-//                detail.frame = CGRectMake(568, 0, self.view.frame.size.width, viewContent.frame.size.height)
-//                break
-//            case 3:
-//                detail.frame = CGRectMake(viewContent.frame.size.width * i, 0, self.view.frame.size.width, viewContent.frame.size.height)
-//                break
-//            default :
-//                detail.frame = CGRectMake(0, 0, self.view.frame.size.width, viewContent.frame.size.height)
-//                break
-//            }
-            detail.frame = CGRectMake(viewContent.frame.size.width * i, 0, self.view.frame.size.width, viewContent.frame.size.height)
+            detail.frame = CGRect(x: self.view.frame.size.width * i, y: 0, width: viewContent.frame.size.width, height: viewContent.frame.size.height)
             scrollContent.addSubview(detail)
         }
     }
