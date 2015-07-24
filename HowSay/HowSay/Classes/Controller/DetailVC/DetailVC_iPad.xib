@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC_iPad" customModule="HowSay" customModuleProvider="target">
@@ -13,10 +14,99 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_green" translatesAutoresizingMaskIntoConstraints="NO" id="KGJ-lj-CoP">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="Xl5-WJ-GBt">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="152"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Xl5-WJ-GBt" secondAttribute="height" multiplier="128:19" id="GBp-d3-3SO"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PF9-A9-JES" userLabel="Pre">
+                    <rect key="frame" x="0.0" y="340" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="88" id="iqE-jI-Epd"/>
+                        <constraint firstAttribute="width" constant="88" id="qeJ-ch-wTV"/>
+                    </constraints>
+                    <state key="normal" image="ic_previously">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHJ-QQ-a4s" userLabel="Next">
+                    <rect key="frame" x="936" y="340" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" id="4Is-SB-zPH"/>
+                        <constraint firstAttribute="height" constant="88" id="uX3-fb-dtz"/>
+                    </constraints>
+                    <state key="normal" image="ic_next">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9jE-2t-jDx" userLabel="Back">
+                    <rect key="frame" x="0.0" y="680" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" id="5SZ-S1-dac"/>
+                        <constraint firstAttribute="height" constant="88" id="MK0-Eg-j2b"/>
+                    </constraints>
+                    <state key="normal" image="ic_back">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28g-bM-wcJ" userLabel="Repeat">
+                    <rect key="frame" x="936" y="680" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="88" id="Uwv-tG-Sgk"/>
+                        <constraint firstAttribute="width" constant="88" id="cd2-hW-e5I"/>
+                    </constraints>
+                    <state key="normal" image="ic_repeat">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b18-m3-Ey8" userLabel="Play">
+                    <rect key="frame" x="468" y="680" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" id="ZEG-pw-SXC"/>
+                        <constraint firstAttribute="height" constant="88" id="iGW-yF-dzo"/>
+                    </constraints>
+                    <state key="normal" image="ic_play">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KGJ-lj-CoP" secondAttribute="trailing" id="2E7-Q2-wWM"/>
+                <constraint firstItem="Xl5-WJ-GBt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="33l-aX-I90"/>
+                <constraint firstAttribute="bottom" secondItem="b18-m3-Ey8" secondAttribute="bottom" id="A51-ig-a3Z"/>
+                <constraint firstItem="PF9-A9-JES" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jc5-ek-ShO"/>
+                <constraint firstAttribute="centerY" secondItem="PF9-A9-JES" secondAttribute="centerY" id="Q8B-nw-bpR"/>
+                <constraint firstAttribute="trailing" secondItem="28g-bM-wcJ" secondAttribute="trailing" id="QsF-CG-eb5"/>
+                <constraint firstAttribute="trailing" secondItem="MHJ-QQ-a4s" secondAttribute="trailing" id="a4C-qe-Tfd"/>
+                <constraint firstItem="KGJ-lj-CoP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aHb-a2-Bap"/>
+                <constraint firstItem="Xl5-WJ-GBt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="aU9-4S-tqq"/>
+                <constraint firstAttribute="bottom" secondItem="9jE-2t-jDx" secondAttribute="bottom" id="bIe-oT-vhK"/>
+                <constraint firstAttribute="centerY" secondItem="MHJ-QQ-a4s" secondAttribute="centerY" id="dnF-mP-ZYW"/>
+                <constraint firstAttribute="trailing" secondItem="Xl5-WJ-GBt" secondAttribute="trailing" id="fUG-xA-nLp"/>
+                <constraint firstAttribute="bottom" secondItem="28g-bM-wcJ" secondAttribute="bottom" id="g1I-O1-vGQ"/>
+                <constraint firstAttribute="centerX" secondItem="b18-m3-Ey8" secondAttribute="centerX" id="gAd-9e-uBt"/>
+                <constraint firstItem="9jE-2t-jDx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hNz-2G-ILk"/>
+                <constraint firstAttribute="bottom" secondItem="KGJ-lj-CoP" secondAttribute="bottom" id="nsj-gf-oZN"/>
+                <constraint firstItem="KGJ-lj-CoP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uhr-ek-uk5"/>
+            </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
             <point key="canvasLocation" x="587" y="384"/>
         </view>
     </objects>
+    <resources>
+        <image name="background_green" width="568" height="257"/>
+        <image name="background_top" width="568" height="84"/>
+        <image name="ic_back" width="34" height="34"/>
+        <image name="ic_next" width="33" height="34"/>
+        <image name="ic_play" width="31" height="32"/>
+        <image name="ic_previously" width="33" height="34"/>
+        <image name="ic_repeat" width="31" height="34"/>
+    </resources>
 </document>
