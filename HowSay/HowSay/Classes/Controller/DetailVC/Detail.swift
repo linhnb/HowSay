@@ -13,6 +13,11 @@ class Detail: UIView {
     @IBOutlet weak var imvImage: UIImageView!
     @IBOutlet weak var btnName: UIButton!
     
+    override func awakeFromNib() {
+        imvImage.layer.cornerRadius = imvImage.frame.height/2
+        imvImage.layer.borderColor = UIColor.whiteColor().CGColor
+        imvImage.layer.borderWidth = 2
+    }
 
     
     @IBAction func namePlay(sender: AnyObject) {
