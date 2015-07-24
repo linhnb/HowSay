@@ -62,7 +62,7 @@
                         <constraint firstAttribute="height" constant="44" id="E36-nb-awN"/>
                         <constraint firstAttribute="width" constant="44" id="z5Y-j0-SZx"/>
                     </constraints>
-                    <state key="normal" image="ic_repeat">
+                    <state key="normal" image="ic_back">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -157,6 +157,7 @@
     <resources>
         <image name="background_green" width="568" height="257"/>
         <image name="background_top" width="568" height="84"/>
+        <image name="ic_back" width="34" height="34"/>
         <image name="ic_next" width="33" height="34"/>
         <image name="ic_play" width="31" height="32"/>
         <image name="ic_previously" width="33" height="34"/>
