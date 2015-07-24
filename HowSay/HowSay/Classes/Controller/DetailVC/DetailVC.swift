@@ -8,23 +8,26 @@
 
 import UIKit
 
-class DetailVC: UIViewController {
+ class DetailVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var scrollContent: UIScrollView!
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
     
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var viewContent: UIView!
-    
+    var position: CGFloat!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-
+        position = 0
+        preButton.hidden = true
+        scrollContent.delegate = self
         
     }
     
@@ -48,13 +51,27 @@ class DetailVC: UIViewController {
     
     
     @IBAction func preTouch(sender: AnyObject) {
-        
+        print("pre touch")
+        if position < 1 {
+            return
+        }
+        position = position - 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * self.position, y: 0)
+        })
     }
     @IBAction func playTouch(sender: AnyObject) {
-        
+        print("Play Audio")
     }
     @IBAction func nextTouch(sender: AnyObject) {
-        
+        print("next touch")
+        if position > 2 {
+            return
+        }
+        position = position + 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * self.position, y: 0)
+        })
     }
     @IBAction func repeatTouch(sender: AnyObject) {
         
@@ -62,5 +79,28 @@ class DetailVC: UIViewController {
     @IBAction func backTouch(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    // Scroll View Delegate
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        print("did end drag")
+        position = scrollView.contentOffset.x / viewContent.frame.size.width
+        
+        if position > 0 && position < 3 {
+            nextButton.hidden = false
+            preButton.hidden = false
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        position = scrollView.contentOffset.x / viewContent.frame.size.width
+        if position == 0 {
+            preButton.hidden = true
+        }
+        if position == 3 {
+            nextButton.hidden = true
+        }
+    }
+    
+    
 
 }

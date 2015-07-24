@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailVC" customModule="HowSay" customModuleProvider="target">
             <connections>
                 <outlet property="backButton" destination="xKP-da-dte" id="mEe-6V-RN8"/>
+                <outlet property="nextButton" destination="tB8-Cj-dnp" id="dBP-V7-ZVk"/>
                 <outlet property="playButton" destination="sOX-OV-pWa" id="3An-pG-bC1"/>
+                <outlet property="preButton" destination="CgS-9l-NnR" id="2ce-mh-OUt"/>
                 <outlet property="repeatButton" destination="asw-p1-j5g" id="5kL-0j-umH"/>
                 <outlet property="scrollContent" destination="S6X-fj-FSa" id="oG4-GN-8qc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

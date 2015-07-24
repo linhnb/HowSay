@@ -13,15 +13,11 @@ class Detail: UIView {
     @IBOutlet weak var imvImage: UIImageView!
     @IBOutlet weak var btnName: UIButton!
     
-//    init(framee: CGRect) {
-//        super.init(frame: framee)
-//        self.frame = framee
-//        NSBundle.mainBundle().loadNibNamed("Detail", owner: self, options: nil)
-//        
-//    }
-//    required init(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    override func awakeFromNib() {
+        imvImage.layer.cornerRadius = imvImage.frame.height/2
+        imvImage.layer.borderColor = UIColor.whiteColor().CGColor
+        imvImage.layer.borderWidth = 2
+    }
 
     
     @IBAction func namePlay(sender: AnyObject) {
