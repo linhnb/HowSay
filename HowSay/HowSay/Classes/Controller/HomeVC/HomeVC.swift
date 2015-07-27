@@ -11,6 +11,10 @@ import UIKit
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
+    
+    var coverView: UIView = UIView()
+    var mainScreen: CGRect = CGRect()
+    var addView = UIView()
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +28,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
         
         
+        mainScreen = UIScreen.mainScreen().bounds
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,12 +38,57 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    //MARK:- addNewCell Delegate
     func addNewCellDelegatePushToAddView() {
         let rootVC = AddNewVC(nibName: "AddNewVC", bundle: nil)
         self.navigationController?.pushViewController(rootVC, animated: false)
     }
     
+    func addNewCellDelegateAddCoverView() {
+//        coverView = UIView(frame: CGRectMake(mainScreen.size.width/6, mainScreen.size.height/6, 2 * mainScreen.size.width/3, 2 * mainScreen.size.height/3))
+//        coverView.backgroundColor = UIColor.lightGrayColor()
+//        coverView.alpha = 0.7
+//        self.addTapGestureTo(view: coverView)
+//        self.addTapGestureTo(view: self.view)
+//        self.view.addSubview(coverView)
+//        coverView.center = self.view.center
+        
+        
+        addView = NSBundle.mainBundle().loadNibNamed("AddView", owner: self, options: nil)[0] as! UIView
+        
+        
+        coverView = UIView(frame: CGRectMake(addView.frame.origin.x - 20, addView.frame.origin.y - 20, addView.frame.size.width + 40 , addView.frame.size.height + 40 ))
+            
+        coverView.backgroundColor = UIColor.lightGrayColor()
+        coverView.alpha = 0.7
+        self.addTapGestureTo(view: coverView)
+        self.addTapGestureTo(view: self.view)
+        
+        
+        self.view.addSubview(coverView)
+        coverView.center = self.view.center
+        
+        self.view.addSubview(addView)
+        addView.center = self.view.center
+
+    }
     
+    
+    
+    //MARK: - dismisCoverView
+    func dismisCoverView (){
+        addView.hidden = true
+        coverView.hidden = true
+        
+    }
+    
+    func addTapGestureTo(#view: UIView) {
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismisCoverView")
+        tapGesture.numberOfTapsRequired = 1
+        tapGesture.numberOfTouchesRequired = 1
+        view.addGestureRecognizer(tapGesture)
+    }
 }
 
 //MARK: - UICollectionViewDelegate
