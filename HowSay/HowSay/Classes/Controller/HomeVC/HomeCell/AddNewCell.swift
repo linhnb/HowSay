@@ -10,6 +10,7 @@ import UIKit
 
 protocol AddNewCellDelegate {
     func addNewCellDelegatePushToAddView();
+    func addNewCellDelegateAddCoverView();
 }
 
 
@@ -17,20 +18,22 @@ class AddNewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageViewItem: UIImageView!
     @IBOutlet weak var imageViewBackground: UIImageView!
-    
     var delegate: AddNewCellDelegate?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
         // Initialization code
         imageViewItem.layer.borderWidth = 2.0
         imageViewItem.layer.borderColor = UIColor.whiteColor().CGColor
-        imageViewItem.layer.cornerRadius = imageViewItem.frame.size.height/2
+        imageViewItem.layer.cornerRadius = imageViewItem.bounds.size.height/2
+        print(imageViewItem.bounds.size.height)
         imageViewItem.clipsToBounds = true
-    }
+}
+    
     @IBAction func touchAddNew(sender: AnyObject) {
         if (UIUserInterfaceIdiom.Pad == UI_USER_INTERFACE_IDIOM()){
-            
+            self.delegate?.addNewCellDelegateAddCoverView()
         } else {
             self.delegate?.addNewCellDelegatePushToAddView()
         }
