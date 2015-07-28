@@ -18,6 +18,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var actionSheet = UIActionSheet()
      var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
+    var addView = UIView()
+    var listSelect: NSMutableArray!
+    @IBOutlet weak var playButton: UIButton!
+    
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +34,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         homeCollectionView.registerNib(nibNameNormal, forCellWithReuseIdentifier: identifier1)
         let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
-        
-        
         mainScreen = UIScreen.mainScreen().bounds
+        listSelect = NSMutableArray()
+        playButton.hidden = true
         
     }
     override func didReceiveMemoryWarning() {
@@ -85,7 +89,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         tapGesture.numberOfTouchesRequired = 1
         view.addGestureRecognizer(tapGesture)
     }
-    
+
     //MARK: - AddviewDelegate
     
     func addViewDelegateDismissAddView() {
@@ -107,6 +111,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         imagePicker!.delegate = self
         actionSheet.showInView(self.view)
     }
+
+    @IBAction func playTouch(sender: UIButton) {
+        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
+    
+
 }
 
 //MARK: - UICollectionViewDelegate
@@ -128,6 +139,12 @@ extension HomeVC {
             return cell
         } else {
              let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier1, forIndexPath: indexPath) as! HomeCell
+            // checked items
+            if findObject(indexPath.item) {
+                cell.setHidenChecked(false)
+            } else {
+                cell.setHidenChecked(true)
+            }
             return cell
         }
         
@@ -136,16 +153,42 @@ extension HomeVC {
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
-//        self.navigationController?.pushViewController(detail, animated: true)
-        print("Select")
-        print(indexPath.row)
+        var cell = collectionView .cellForItemAtIndexPath(indexPath) as! HomeCell
+        
+        if findObject(indexPath.item) {
+            listSelect.removeObject(indexPath.item)
+            cell.setHidenChecked(true)
+            if listSelect.count == 0 {
+                playButton.hidden = true
+            }
+        } else {
+            listSelect.addObject(indexPath.item)
+            cell.setHidenChecked(false)
+            playButton.hidden = false
+        }
+        
     }
     
+
     
 }
 
 //MARK: - UIpickerControllerDelegate
+
+    
+    func findObject(value: Int)-> Bool {
+        var count = listSelect.count
+        if count <= 0 {
+            return false
+        }
+        for var i = 0; i < listSelect.count; i++ {
+            if (listSelect.objectAtIndex(i) as! Int) == value {
+                return true
+            }
+        }
+        return false
+    }
+
 
 extension HomeVC {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
@@ -193,7 +236,10 @@ extension HomeVC {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+
 }
+
+
 
 
 

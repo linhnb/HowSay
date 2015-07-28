@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="HowSay" customModuleProvider="target">
             <connections>
                 <outlet property="homeCollectionView" destination="qMp-Hi-uRL" id="pqi-vl-G6Y"/>
+                <outlet property="playButton" destination="Apz-WH-s4u" id="gf9-FD-p3V"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -57,6 +58,9 @@
                     <state key="normal" image="ic_play">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="playTouch:" destination="-1" eventType="touchUpInside" id="stV-mQ-PWo"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
