@@ -58,9 +58,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         addView = NSBundle.mainBundle().loadNibNamed("AddView", owner: self, options: nil)[0] as! UIView
         
         
-        coverView = UIView(frame: CGRectMake(addView.frame.origin.x - 20, addView.frame.origin.y - 20, addView.frame.size.width + 40 , addView.frame.size.height + 40 ))
+        //coverView = UIView(frame: CGRectMake(addView.frame.origin.x - 20, addView.frame.origin.y - 20, addView.frame.size.width + 40 , addView.frame.size.height + 40 ))
+        coverView = UIView(frame: mainScreen)
             
-        coverView.backgroundColor = UIColor.lightGrayColor()
+        coverView.backgroundColor = UIColor.whiteColor()
         coverView.alpha = 0.7
         self.addTapGestureTo(view: coverView)
         self.addTapGestureTo(view: self.view)

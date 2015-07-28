@@ -82,12 +82,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqf-AD-YQD" userLabel="ViewImage">
                             <rect key="frame" x="216" y="8" width="136" height="136"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_item" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-1e-p5E">
-                                    <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
-                                </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vrH-kd-uY8">
                                     <rect key="frame" x="8" y="8" width="120" height="120"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_item" translatesAutoresizingMaskIntoConstraints="NO" id="zeE-1e-p5E">
+                                    <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-va-Qxt">
                                     <rect key="frame" x="0.0" y="0.0" width="136" height="136"/>
@@ -151,10 +151,10 @@
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="336" y="323"/>
         </view>
     </objects>
     <resources>
-        <image name="background_item" width="92" height="92"/>
         <image name="background_top" width="568" height="84"/>
         <image name="background_txf" width="315" height="34"/>
         <image name="background_yellow" width="568" height="257"/>
@@ -162,5 +162,6 @@
         <image name="ic_camera" width="30" height="23"/>
         <image name="ic_checked" width="23" height="23"/>
         <image name="ic_micro" width="21" height="35"/>
+        <image name="icon_item" width="92" height="92"/>
     </resources>
 </document>

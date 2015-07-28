@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		823BC0D91B5F7334007B3957 /* HowSayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0D81B5F7334007B3957 /* HowSayTests.swift */; };
 		823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0E41B5F7496007B3957 /* AppDelegate.swift */; };
-		8242A6FE1B6728A400D625FA /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242A6FC1B6728A400D625FA /* Detail.swift */; };
-		8242A6FF1B6728A400D625FA /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8242A6FD1B6728A400D625FA /* Detail.xib */; };
 		825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A44E81B66211B0095952B /* HomeVC~ipad.swift */; };
 		825A44EB1B66211B0095952B /* HomeVC~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825A44E91B66211B0095952B /* HomeVC~ipad.xib */; };
+		828E1E681B60C56A0024D784 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E1E661B60C56A0024D784 /* Detail.swift */; };
+		828E1E691B60C56A0024D784 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828E1E671B60C56A0024D784 /* Detail.xib */; };
+		82A889251B673C02008B049C /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A889231B673C02008B049C /* AddNewVC.swift */; };
+		82A889261B673C02008B049C /* AddNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A889241B673C02008B049C /* AddNewVC.xib */; };
 		82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CE81B60793A00B733EC /* HomeVC.swift */; };
 		82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3CE91B60793A00B733EC /* HomeVC.xib */; };
 		82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CF71B608EA100B733EC /* CircleImage.swift */; };
@@ -26,8 +28,6 @@
 		82BD3D081B60D56600B733EC /* AddNewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D061B60D56600B733EC /* AddNewCell.xib */; };
 		82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D0A1B60DB4200B733EC /* AddView.swift */; };
 		82BD3D0D1B60DB5100B733EC /* AddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D0C1B60DB5100B733EC /* AddView.xib */; };
-		82BD3D111B60DBD700B733EC /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */; };
-		82BD3D121B60DBD700B733EC /* AddNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3D101B60DBD700B733EC /* AddNewVC.xib */; };
 		82C68E9D1B5F7716004C6AA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82C68E971B5F7716004C6AA8 /* LaunchScreen.xib */; };
 		82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C68E991B5F7716004C6AA8 /* Main.storyboard */; };
 		82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C68E9C1B5F7716004C6AA8 /* ViewController.swift */; };
@@ -53,10 +53,12 @@
 		823BC0D71B5F7334007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0D81B5F7334007B3957 /* HowSayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowSayTests.swift; sourceTree = "<group>"; };
 		823BC0E41B5F7496007B3957 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8242A6FC1B6728A400D625FA /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
-		8242A6FD1B6728A400D625FA /* Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
 		825A44E81B66211B0095952B /* HomeVC~ipad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeVC~ipad.swift"; sourceTree = "<group>"; };
 		825A44E91B66211B0095952B /* HomeVC~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeVC~ipad.xib"; sourceTree = "<group>"; };
+		828E1E661B60C56A0024D784 /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		828E1E671B60C56A0024D784 /* Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
+		82A889231B673C02008B049C /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
+		82A889241B673C02008B049C /* AddNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewVC.xib; sourceTree = "<group>"; };
 		82BD3CE81B60793A00B733EC /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		82BD3CE91B60793A00B733EC /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		82BD3CF01B60823F00B733EC /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -72,8 +74,6 @@
 		82BD3D061B60D56600B733EC /* AddNewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewCell.xib; sourceTree = "<group>"; };
 		82BD3D0A1B60DB4200B733EC /* AddView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		82BD3D0C1B60DB5100B733EC /* AddView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddView.xib; sourceTree = "<group>"; };
-		82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
-		82BD3D101B60DBD700B733EC /* AddNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewVC.xib; sourceTree = "<group>"; };
 		82C68E981B5F7716004C6AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		82C68E9A1B5F7716004C6AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		82C68E9C1B5F7716004C6AA8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,11 +176,11 @@
 		823BC0E51B5F7496007B3957 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				82A8891C1B671B3D008B049C /* Common */,
 				82BD3CEF1B60823000B733EC /* Defines */,
 				82C68E961B5F7716004C6AA8 /* Base.lproj */,
 				82C68E9C1B5F7716004C6AA8 /* ViewController.swift */,
 				823BC0E61B5F7496007B3957 /* BaseControllers */,
-				823BC0E71B5F7496007B3957 /* Common */,
 				823BC0E91B5F7496007B3957 /* WebServices */,
 			);
 			path = Base;
@@ -191,13 +191,6 @@
 			children = (
 			);
 			path = BaseControllers;
-			sourceTree = "<group>";
-		};
-		823BC0E71B5F7496007B3957 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		823BC0E91B5F7496007B3957 /* WebServices */ = {
@@ -220,6 +213,8 @@
 		823BC0EB1B5F7496007B3957 /* DetailVC */ = {
 			isa = PBXGroup;
 			children = (
+				828E1E661B60C56A0024D784 /* Detail.swift */,
+				828E1E671B60C56A0024D784 /* Detail.xib */,
 				82BD3CFF1B60B55000B733EC /* DetailVC_iPad.xib */,
 				82BD3D001B60B55000B733EC /* DetailVC.swift */,
 				82BD3D011B60B55000B733EC /* DetailVC.xib */,
@@ -260,7 +255,6 @@
 		823BC0EF1B5F7496007B3957 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8242A6FB1B6728A400D625FA /* DetailView */,
 				82BD3D091B60DB0B00B733EC /* AddView */,
 				82BD3CF61B608D5F00B733EC /* CircleImage */,
 			);
@@ -292,13 +286,11 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
-		8242A6FB1B6728A400D625FA /* DetailView */ = {
+		82A8891C1B671B3D008B049C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				8242A6FC1B6728A400D625FA /* Detail.swift */,
-				8242A6FD1B6728A400D625FA /* Detail.xib */,
 			);
-			path = DetailView;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		82BD3CEF1B60823000B733EC /* Defines */ = {
@@ -331,8 +323,8 @@
 		82BD3D0E1B60DBC000B733EC /* AddNewVC */ = {
 			isa = PBXGroup;
 			children = (
-				82BD3D0F1B60DBD700B733EC /* AddNewVC.swift */,
-				82BD3D101B60DBD700B733EC /* AddNewVC.xib */,
+				82A889231B673C02008B049C /* AddNewVC.swift */,
+				82A889241B673C02008B049C /* AddNewVC.xib */,
 			);
 			path = AddNewVC;
 			sourceTree = "<group>";
@@ -427,6 +419,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A889261B673C02008B049C /* AddNewVC.xib in Resources */,
 				82BD3CFE1B60A8F100B733EC /* HomeCell.xib in Resources */,
 				82BD3D041B60B55000B733EC /* DetailVC.xib in Resources */,
 				82BD3D081B60D56600B733EC /* AddNewCell.xib in Resources */,
@@ -434,10 +427,9 @@
 				825A44EB1B66211B0095952B /* HomeVC~ipad.xib in Resources */,
 				82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */,
 				82BD3D021B60B55000B733EC /* DetailVC_iPad.xib in Resources */,
+				828E1E691B60C56A0024D784 /* Detail.xib in Resources */,
 				82C68EA51B5F7736004C6AA8 /* Images.xcassets in Resources */,
 				82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */,
-				82BD3D121B60DBD700B733EC /* AddNewVC.xib in Resources */,
-				8242A6FF1B6728A400D625FA /* Detail.xib in Resources */,
 				82BD3D0D1B60DB5100B733EC /* AddView.xib in Resources */,
 				82BD3CFA1B608EB600B733EC /* CircleImage.xib in Resources */,
 			);
@@ -459,13 +451,13 @@
 			files = (
 				82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */,
 				82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */,
-				8242A6FE1B6728A400D625FA /* Detail.swift in Sources */,
 				825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */,
 				82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */,
 				82BD3CFD1B60A8F100B733EC /* HomeCell.swift in Sources */,
+				82A889251B673C02008B049C /* AddNewVC.swift in Sources */,
+				828E1E681B60C56A0024D784 /* Detail.swift in Sources */,
 				82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */,
 				82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */,
-				82BD3D111B60DBD700B733EC /* AddNewVC.swift in Sources */,
 				82BD3D031B60B55000B733EC /* DetailVC.swift in Sources */,
 				823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */,
 				82C68EA31B5F772C004C6AA8 /* HowSay.xcdatamodeld in Sources */,
