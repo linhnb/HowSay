@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddNewVC: UIViewController, UITextFieldDelegate {
+class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
 
     @IBOutlet weak var viewImageItemImage: UIImageView!
     @IBOutlet weak var viewImageBackGroundImage: UIImageView!
@@ -17,21 +17,25 @@ class AddNewVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var microButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var detailView: UIView!
-
     
+    var actionSheet = UIActionSheet()
+    var chooseImage = UIImage()
     var constaintDetailFrame: CGRect? = CGRect()
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewImageButton.hidden = false
         viewImageItemImage.backgroundColor = UIColor.whiteColor()
         viewImageItemImage.layer.cornerRadius = viewImageItemImage.frame.size.height/2
         viewImageButton.layer.cornerRadius = viewImageButton.frame.size.height/2
         
-        
         constaintDetailFrame = detailView.frame
-        // Do any additional setup after loading the view.
-        
         self.registerForKeyboardNotifications()
+        
+        actionSheet = UIActionSheet(title: "Choose Image", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles:"Take Photo", "Choose From Gallary")
+        
+        imagePicker.delegate = self
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -44,6 +48,9 @@ class AddNewVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func touchChooseImage(sender: AnyObject) {
         detailView.frame = constaintDetailFrame!
+        
+        actionSheet.showInView(self.view)
+        
     }
     @IBAction func touchDone(sender: AnyObject) {
         detailView.frame = constaintDetailFrame!
@@ -98,5 +105,51 @@ class AddNewVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    //MARK: - ActionSheet Delegate
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        
+        //cancel
+        if(buttonIndex == actionSheet.cancelButtonIndex){
+            
+        }
+        //takePhoto
+        if(buttonIndex == 1){
+            self.openCamera()
+        }
+        //choose Library
+        if(buttonIndex == 2){
+            self.openGallary()
+        }
+    }
+    
+    func openCamera() {
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            self.openGallary()
+        }
+    }
+    
+    func openGallary () {
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
 
+}
+
+// MARK: - UIImgaePickerController
+extension AddNewVC {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            chooseImage = pickerImage
+            viewImageItemImage.image = chooseImage
+            viewImageButton.hidden = true
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
