@@ -117,10 +117,14 @@ extension HomeVC {
     }
     
     
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
-        self.navigationController?.pushViewController(detail, animated: true)
+//        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
+//        self.navigationController?.pushViewController(detail, animated: true)
+        print("Select")
+        print(indexPath.row)
     }
+    
     
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 //        let heightSize = (collectionView.frame.size.height - 50)/2
@@ -130,3 +134,14 @@ extension HomeVC {
 //    }
 
 }
+
+
+
+
+
+
+
+
+
+
+

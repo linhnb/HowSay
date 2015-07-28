@@ -12,6 +12,9 @@ class HomeCell: UICollectionViewCell {
 
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var backGroundImage: UIImageView!
+    @IBOutlet weak var checkedImage: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         backGroundImage.layer.cornerRadius = backGroundImage.frame.size.height/2
@@ -21,5 +24,7 @@ class HomeCell: UICollectionViewCell {
         // Initialization code
     }
     
-
+    func setHidenChecked(hidden: Bool) {
+        checkedImage.hidden = hidden;
+    }
 }
