@@ -21,6 +21,7 @@ class HomeCell: UICollectionViewCell {
         itemImage.layer.cornerRadius = itemImage.frame.size.height/2
         itemImage.layer.borderWidth = 2.0
         itemImage.layer.borderColor = UIColor.whiteColor().CGColor
+        checkedImage.hidden = true
         // Initialization code
     }
     
