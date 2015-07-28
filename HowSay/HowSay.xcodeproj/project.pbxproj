@@ -7,17 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8224AD051B660BF0001E59DF /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8224AD031B660BF0001E59DF /* Detail.swift */; };
-		8224AD061B660BF0001E59DF /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8224AD041B660BF0001E59DF /* Detail.xib */; };
 		823BC0D91B5F7334007B3957 /* HowSayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0D81B5F7334007B3957 /* HowSayTests.swift */; };
 		823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0E41B5F7496007B3957 /* AppDelegate.swift */; };
-<<<<<<< HEAD
-=======
+		8242A6FE1B6728A400D625FA /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8242A6FC1B6728A400D625FA /* Detail.swift */; };
+		8242A6FF1B6728A400D625FA /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8242A6FD1B6728A400D625FA /* Detail.xib */; };
 		825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A44E81B66211B0095952B /* HomeVC~ipad.swift */; };
 		825A44EB1B66211B0095952B /* HomeVC~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825A44E91B66211B0095952B /* HomeVC~ipad.xib */; };
-		828E1E681B60C56A0024D784 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 828E1E661B60C56A0024D784 /* Detail.swift */; };
-		828E1E691B60C56A0024D784 /* Detail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 828E1E671B60C56A0024D784 /* Detail.xib */; };
->>>>>>> master
 		82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CE81B60793A00B733EC /* HomeVC.swift */; };
 		82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82BD3CE91B60793A00B733EC /* HomeVC.xib */; };
 		82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82BD3CF71B608EA100B733EC /* CircleImage.swift */; };
@@ -51,8 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8224AD031B660BF0001E59DF /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
-		8224AD041B660BF0001E59DF /* Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
 		823BC0BA1B5F7333007B3957 /* HowSay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowSay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		823BC0BE1B5F7333007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0C21B5F7333007B3957 /* HowSay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HowSay.xcdatamodel; sourceTree = "<group>"; };
@@ -60,13 +53,10 @@
 		823BC0D71B5F7334007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0D81B5F7334007B3957 /* HowSayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowSayTests.swift; sourceTree = "<group>"; };
 		823BC0E41B5F7496007B3957 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
+		8242A6FC1B6728A400D625FA /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		8242A6FD1B6728A400D625FA /* Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
 		825A44E81B66211B0095952B /* HomeVC~ipad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeVC~ipad.swift"; sourceTree = "<group>"; };
 		825A44E91B66211B0095952B /* HomeVC~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeVC~ipad.xib"; sourceTree = "<group>"; };
-		828E1E661B60C56A0024D784 /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
-		828E1E671B60C56A0024D784 /* Detail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Detail.xib; sourceTree = "<group>"; };
->>>>>>> master
 		82BD3CE81B60793A00B733EC /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		82BD3CE91B60793A00B733EC /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
 		82BD3CF01B60823F00B733EC /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
@@ -109,15 +99,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8224AD021B660BF0001E59DF /* DetailView */ = {
-			isa = PBXGroup;
-			children = (
-				8224AD031B660BF0001E59DF /* Detail.swift */,
-				8224AD041B660BF0001E59DF /* Detail.xib */,
-			);
-			path = DetailView;
-			sourceTree = "<group>";
-		};
 		823BC0B11B5F7333007B3957 = {
 			isa = PBXGroup;
 			children = (
@@ -279,7 +260,7 @@
 		823BC0EF1B5F7496007B3957 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8224AD021B660BF0001E59DF /* DetailView */,
+				8242A6FB1B6728A400D625FA /* DetailView */,
 				82BD3D091B60DB0B00B733EC /* AddView */,
 				82BD3CF61B608D5F00B733EC /* CircleImage */,
 			);
@@ -309,6 +290,15 @@
 				82C68EA41B5F7736004C6AA8 /* Images.xcassets */,
 			);
 			path = Image;
+			sourceTree = "<group>";
+		};
+		8242A6FB1B6728A400D625FA /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				8242A6FC1B6728A400D625FA /* Detail.swift */,
+				8242A6FD1B6728A400D625FA /* Detail.xib */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 		82BD3CEF1B60823000B733EC /* Defines */ = {
@@ -444,15 +434,10 @@
 				825A44EB1B66211B0095952B /* HomeVC~ipad.xib in Resources */,
 				82BD3CEB1B60793A00B733EC /* HomeVC.xib in Resources */,
 				82BD3D021B60B55000B733EC /* DetailVC_iPad.xib in Resources */,
-<<<<<<< HEAD
-				82BD3CF41B60833700B733EC /* HomeVC_IPAD.xib in Resources */,
-=======
-				828E1E691B60C56A0024D784 /* Detail.xib in Resources */,
->>>>>>> master
 				82C68EA51B5F7736004C6AA8 /* Images.xcassets in Resources */,
 				82C68E9E1B5F7716004C6AA8 /* Main.storyboard in Resources */,
 				82BD3D121B60DBD700B733EC /* AddNewVC.xib in Resources */,
-				8224AD061B660BF0001E59DF /* Detail.xib in Resources */,
+				8242A6FF1B6728A400D625FA /* Detail.xib in Resources */,
 				82BD3D0D1B60DB5100B733EC /* AddView.xib in Resources */,
 				82BD3CFA1B608EB600B733EC /* CircleImage.xib in Resources */,
 			);
@@ -474,17 +459,10 @@
 			files = (
 				82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */,
 				82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */,
-<<<<<<< HEAD
-				8224AD051B660BF0001E59DF /* Detail.swift in Sources */,
-				82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */,
-				82BD3CFD1B60A8F100B733EC /* HomeCell.swift in Sources */,
-				82BD3CF31B60833700B733EC /* HomeVC_IPAD.swift in Sources */,
-=======
+				8242A6FE1B6728A400D625FA /* Detail.swift in Sources */,
 				825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */,
 				82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */,
 				82BD3CFD1B60A8F100B733EC /* HomeCell.swift in Sources */,
-				828E1E681B60C56A0024D784 /* Detail.swift in Sources */,
->>>>>>> master
 				82BD3CEA1B60793A00B733EC /* HomeVC.swift in Sources */,
 				82BD3CF81B608EA100B733EC /* CircleImage.swift in Sources */,
 				82BD3D111B60DBD700B733EC /* AddNewVC.swift in Sources */,
