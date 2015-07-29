@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822D06D31B68B83900D6DF8A /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822D06D21B68B83900D6DF8A /* Word.swift */; };
 		823BC0D91B5F7334007B3957 /* HowSayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0D81B5F7334007B3957 /* HowSayTests.swift */; };
 		823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0E41B5F7496007B3957 /* AppDelegate.swift */; };
 		825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A44E81B66211B0095952B /* HomeVC~ipad.swift */; };
@@ -46,9 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		822D06D21B68B83900D6DF8A /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		823BC0BA1B5F7333007B3957 /* HowSay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowSay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		823BC0BE1B5F7333007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		823BC0C21B5F7333007B3957 /* HowSay.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HowSay.xcdatamodel; sourceTree = "<group>"; };
 		823BC0D21B5F7334007B3957 /* HowSayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowSayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		823BC0D71B5F7334007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0D81B5F7334007B3957 /* HowSayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowSayTests.swift; sourceTree = "<group>"; };
@@ -99,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		822D06D11B68B82200D6DF8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				822D06D21B68B83900D6DF8A /* Word.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		823BC0B11B5F7333007B3957 = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +131,6 @@
 			children = (
 				823BC0E21B5F7496007B3957 /* Classes */,
 				823BC0F11B5F7496007B3957 /* Resoursce */,
-				823BC0C11B5F7333007B3957 /* HowSay.xcdatamodeld */,
 				823BC0BD1B5F7333007B3957 /* Supporting Files */,
 			);
 			path = HowSay;
@@ -156,6 +164,7 @@
 		823BC0E21B5F7496007B3957 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				822D06D11B68B82200D6DF8A /* Model */,
 				823BC0E31B5F7496007B3957 /* AppDelegate */,
 				823BC0E51B5F7496007B3957 /* Base */,
 				823BC0EA1B5F7496007B3957 /* Controller */,
@@ -457,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822D06D31B68B83900D6DF8A /* Word.swift in Sources */,
 				82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */,
 				82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */,
 				82A8892F1B674104008B049C /* Detail.swift in Sources */,
@@ -690,16 +700,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		823BC0C11B5F7333007B3957 /* HowSay.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				823BC0C21B5F7333007B3957 /* HowSay.xcdatamodel */,
-			);
-			currentVersion = 823BC0C21B5F7333007B3957 /* HowSay.xcdatamodel */;
-			path = HowSay.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		82C68EA11B5F772C004C6AA8 /* HowSay.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
