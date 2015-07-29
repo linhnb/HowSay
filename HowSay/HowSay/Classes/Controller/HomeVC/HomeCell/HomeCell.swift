@@ -13,7 +13,14 @@ class HomeCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var backGroundImage: UIImageView!
     @IBOutlet weak var checkedImage: UIImageView!
-    
+    var word: Word? {
+        willSet {
+            //itemImage.image = newValue.valueForKey("image")
+            //let imageData = newValue?.image //newValue!.valueForKey("image") as! NSData
+            //let image = //UIImage(data: imageData)
+            itemImage.image = newValue?.image
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

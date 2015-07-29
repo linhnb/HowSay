@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
     var identifier1 = "cell1"
@@ -18,9 +19,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var actionSheet = UIActionSheet()
      var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
-    var addView = UIView()
     var listSelect: NSMutableArray!
+    var numberOfCell = 0
     @IBOutlet weak var playButton: UIButton!
+    
+    var words = [Word]()
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -39,6 +42,46 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         playButton.hidden = true
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //1
+        let appDelegate =
+        UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //2
+        let fetchRequest = NSFetchRequest(entityName:"Word")
+        
+        //3
+        var error: NSError?
+        
+        let fetchedResults =
+        managedContext.executeFetchRequest(fetchRequest,
+            error: &error) as? [NSManagedObject]
+        
+        if let results = fetchedResults {
+            let array: [NSManagedObject]  = results
+            self.parseDataFromArray(array)
+        } else {
+            println("Could not fetch \(error), \(error!.userInfo)")
+        }
+    }
+    
+    func parseDataFromArray (arrayWord: NSArray) {
+        for item in arrayWord {
+            let keyWord = item.valueForKey("keyword") as! String
+            let imageData: NSData = item.valueForKey("image") as! NSData
+            //let audioData: NSData = item.valueForKey("audio") as! NSData
+            
+            let word = Word()
+            word.keyword = keyWord
+            word.image = UIImage(data: imageData)!
+            words.append(word)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,6 +89,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    
     
     //MARK:- addNewCell Delegate
     func addNewCellDelegatePushToAddView() {
@@ -128,17 +173,21 @@ extension HomeVC {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        numberOfCell = words.count + 1
+        return numberOfCell
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if (indexPath.item == 19){
+        if (indexPath.item == numberOfCell - 1){
              let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier2, forIndexPath: indexPath) as! AddNewCell
             cell.delegate = self
             return cell
         } else {
-             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier1, forIndexPath: indexPath) as! HomeCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier1, forIndexPath: indexPath) as! HomeCell
+            
+            let word = words[indexPath.row]
+            cell.word = word
             // checked items
             if findObject(indexPath.item) {
                 cell.setHidenChecked(false)
@@ -169,13 +218,6 @@ extension HomeVC {
         
     }
     
-
-    
-}
-
-//MARK: - UIpickerControllerDelegate
-
-    
     func findObject(value: Int)-> Bool {
         var count = listSelect.count
         if count <= 0 {
@@ -188,8 +230,10 @@ extension HomeVC {
         }
         return false
     }
+    
+}
 
-
+//MARK: - UIpickerControllerDelegate
 extension HomeVC {
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if (buttonIndex == 0) {

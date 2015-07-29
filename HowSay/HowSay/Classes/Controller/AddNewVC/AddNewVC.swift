@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import AVFoundation
 
 class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
 
@@ -14,9 +16,14 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     @IBOutlet weak var viewImageBackGroundImage: UIImageView!
     @IBOutlet weak var viewImageButton: UIButton!
     @IBOutlet weak var keyWordTextFiled: UITextField!
-    @IBOutlet weak var microButton: UIButton!
+    @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var detailView: UIView!
+    
+    
+    
+    var soundFileURL: NSURL!
+    var recorder: AVAudioRecorder!
     
     var actionSheet = UIActionSheet()
     var chooseImage = UIImage()
@@ -34,7 +41,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         self.registerForKeyboardNotifications()
         
         actionSheet = UIActionSheet(title: "Choose Image", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles:"Take Photo", "Choose From Gallary")
-        
+        recordButton.selected = false
         imagePicker.delegate = self
     }
     
@@ -45,7 +52,50 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func startRecord() {
+        print("start record")
+        recorder.record()
+    }
     
+    func endRecord() {
+        print("end record")
+        recorder.stop()
+    }
+    
+    @IBAction func touchRecord(sender: AnyObject) {
+        print("Touch Record")
+        
+        
+        var recordSettings:[NSObject: AnyObject] = [
+            AVFormatIDKey: kAudioFormatAppleLossless,
+            AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
+            AVEncoderBitRateKey : 128000,
+            AVNumberOfChannelsKey: 2,
+            AVSampleRateKey : 44100.0
+        ]
+        var error: NSError?
+        
+        var format = NSDateFormatter()
+        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+        var currentFileName = "recording-\(format.stringFromDate(NSDate())).m4a"
+        println(currentFileName)
+        
+        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+        var docsDir: AnyObject = dirPaths[0]
+        var soundFilePath = docsDir.stringByAppendingPathComponent(currentFileName)
+        soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+        print(soundFileURL)
+        recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
+        
+        recorder.prepareToRecord()
+        
+        recordButton.selected = !recordButton.selected
+        if(recordButton.selected == true) {
+            self.startRecord()
+        } else {
+            self.endRecord()
+        }
+    }
     @IBAction func touchChooseImage(sender: AnyObject) {
         detailView.frame = constaintDetailFrame!
         
@@ -54,6 +104,26 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     @IBAction func touchDone(sender: AnyObject) {
         detailView.frame = constaintDetailFrame!
+        
+        //1
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //2
+        let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: managedContext)
+        let word = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        //3
+        word.setValue(keyWordTextFiled.text, forKey: "keyword")
+        let imageData = UIImageJPEGRepresentation(chooseImage, 1.0)
+        word.setValue(imageData, forKey: "image")
+        //word.setValue(chooseImage, forKey: "image")
+        //4 
+        var error: NSError?
+        if (!managedContext.save(&error)) {
+            print("Save error\(error)")
+        }
+        
         let root = HomeVC(nibName: "HomeVC", bundle: nil)
         self.navigationController?.pushViewController(root, animated: false)
     }
