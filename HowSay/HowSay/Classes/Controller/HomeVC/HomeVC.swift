@@ -8,12 +8,16 @@
 
 import UIKit
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
     
     var coverView: UIView = UIView()
     var mainScreen: CGRect = CGRect()
+    var addView = AddView()
+    var actionSheet = UIActionSheet()
+     var chooseImage = UIImage()
+    let imagePicker:UIImagePickerController? = UIImagePickerController()
     var addView = UIView()
     var listSelect: NSMutableArray!
     @IBOutlet weak var playButton: UIButton!
@@ -22,6 +26,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         self.loadViewBegin()
+        imagePicker!.delegate = self
     }
     
     func loadViewBegin() {
@@ -49,18 +54,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func addNewCellDelegateAddCoverView() {
-//        coverView = UIView(frame: CGRectMake(mainScreen.size.width/6, mainScreen.size.height/6, 2 * mainScreen.size.width/3, 2 * mainScreen.size.height/3))
-//        coverView.backgroundColor = UIColor.lightGrayColor()
-//        coverView.alpha = 0.7
-//        self.addTapGestureTo(view: coverView)
-//        self.addTapGestureTo(view: self.view)
-//        self.view.addSubview(coverView)
-//        coverView.center = self.view.center
-        
-        
-        addView = NSBundle.mainBundle().loadNibNamed("AddView", owner: self, options: nil)[0] as! UIView
-        
-        
+        addView = NSBundle.mainBundle().loadNibNamed("AddView", owner: self, options: nil)[0] as! AddView
+        addView.delegate = self
+
         //coverView = UIView(frame: CGRectMake(addView.frame.origin.x - 20, addView.frame.origin.y - 20, addView.frame.size.width + 40 , addView.frame.size.height + 40 ))
         coverView = UIView(frame: mainScreen)
             
@@ -93,12 +89,35 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         tapGesture.numberOfTouchesRequired = 1
         view.addGestureRecognizer(tapGesture)
     }
+
+    //MARK: - AddviewDelegate
     
+    func addViewDelegateDismissAddView() {
+         self.dismisCoverView()
+    }
+    
+    func addViewDelegatePresentView(#imagePicker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true
+            , completion: { () -> Void in
+                self.presentViewController(self.imagePicker!, animated: true, completion: nil)
+        })
+    }
+    
+    func addViewDelegateDismissViewController() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    func addViewDelegateShowActionSheet() {
+         actionSheet = UIActionSheet(title: "Choose Image", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Take Photo", "Choose From Gallary")
+        imagePicker!.delegate = self
+        actionSheet.showInView(self.view)
+    }
+
     @IBAction func playTouch(sender: UIButton) {
         let detail = DetailVC(nibName: "DetailVC", bundle: nil)
         self.navigationController?.pushViewController(detail, animated: true)
     }
     
+
 }
 
 //MARK: - UICollectionViewDelegate
@@ -150,12 +169,12 @@ extension HomeVC {
         
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        let heightSize = (collectionView.frame.size.height - 50)/2
-//        let size = CGSizeMake(heightSize, heightSize)
-//        
-//        return size
-//    }
+
+    
+}
+
+//MARK: - UIpickerControllerDelegate
+
     
     func findObject(value: Int)-> Bool {
         var count = listSelect.count
@@ -171,8 +190,55 @@ extension HomeVC {
     }
 
 
+extension HomeVC {
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if (buttonIndex == 0) {
+            
+        }
+        
+        if (buttonIndex == 1) {
+            self.openCamera()
+        }
+        
+        if (buttonIndex == 2) {
+            self.openGallary()
+        }
+    }
+    
+    func openCamera() {
+        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)) {
+            imagePicker!.sourceType = UIImagePickerControllerSourceType.Camera
+            self.presentViewController(imagePicker!, animated: true, completion: nil)
+            
+        } else {
+            self.openGallary()
+        }
+    }
+    
+    func openGallary() {
+        //self.presentViewController(imagePicker!, animated: true, completion: nil)
+        self.dismissViewControllerAnimated(true
+            , completion: { () -> Void in
+              self.presentViewController(self.imagePicker!, animated: true, completion: nil)
+        })
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            chooseImage = pickerImage
+            //iconImage.image = chooseImage
+            //chooseImageButton.hidden = true
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+
 
 }
+
 
 
 
