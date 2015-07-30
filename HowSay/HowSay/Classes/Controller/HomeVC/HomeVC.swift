@@ -73,12 +73,12 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func parseDataFromArray (arrayWord: NSArray) {
         for item in arrayWord {
             let keyWord = item.valueForKey("keyword") as! String
-            let imageData: NSData = item.valueForKey("image") as! NSData
+            let image = item.valueForKey("image") as! String
             //let audioData: NSData = item.valueForKey("audio") as! NSData
             
             let word = Word()
             word.keyword = keyWord
-            word.image = UIImage(data: imageData)!
+            word.image = image//UIImage(data: imageData)!
             words.append(word)
         }
     }
