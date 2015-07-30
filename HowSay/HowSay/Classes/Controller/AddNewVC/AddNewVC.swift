@@ -91,8 +91,11 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         soundFileURL = NSURL(fileURLWithPath: soundFilePath)
         print(soundFileURL)
         recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
-        
         recorder.prepareToRecord()
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        userDefault.setURL(soundFileURL, forKey: "audio")
+        
         
         recordButton.selected = !recordButton.selected
         if(recordButton.selected == true) {
@@ -235,13 +238,13 @@ extension AddNewVC {
         var fomat = NSDateFormatter()
         fomat.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         var currentFileName = "image-\(fomat.stringFromDate(NSDate())).png"
-        print(currentFileName)
+        print("amilaza1 \(currentFileName)")
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
         var docDir: AnyObject = dirPaths[0]
         imageFilePath = docDir.stringByAppendingPathComponent(currentFileName)
         imageFileURL = NSURL(fileURLWithPath: imageFilePath)
-        print(imageFilePath)
+        print("amilaza2 \(imageFilePath)")
         UIImagePNGRepresentation(chooseImage).writeToFile(imageFilePath, atomically: true)
         
     }

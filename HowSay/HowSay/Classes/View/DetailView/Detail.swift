@@ -16,10 +16,27 @@ class Detail: UIView {
     var word: Word? {
         willSet{
             btnName.setTitle(newValue?.keyword, forState: UIControlState.Normal)
-            let imageString = newValue?.image
-            let imageData = NSData(contentsOfFile:"Documents/image-2015-07-30-14-12-13.png")
-            imvImage.image = UIImage(contentsOfFile: imageString!)
+            var imageString = String()
             
+            if (newValue?.image != nil) {
+                imageString = newValue!.image
+            }
+            var error: NSError?
+            let csvContent = NSString(contentsOfFile: imageString, encoding:NSUTF8StringEncoding, error: &error)
+            if csvContent != nil {
+                imvImage.image = UIImage(contentsOfFile: imageString)
+            }
+            else {
+                println("error: \(error)")
+            }
+            
+            var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+            var docDir: AnyObject = dirPaths[0]
+            let path = docDir.stringByAppendingPathComponent("image-2015-07-30-16-54-35.png")
+            
+            print("ami1:  \(path)")
+            print("ami2:  \(imageString)")
+            //imvImage.image = UIImage(contentsOfFile: path)
         }
     }
     override func awakeFromNib() {
