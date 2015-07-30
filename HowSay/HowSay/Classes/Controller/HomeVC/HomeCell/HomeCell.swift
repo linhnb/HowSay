@@ -18,7 +18,9 @@ class HomeCell: UICollectionViewCell {
             //itemImage.image = newValue.valueForKey("image")
             //let imageData = newValue?.image //newValue!.valueForKey("image") as! NSData
             //let image = //UIImage(data: imageData)
-            itemImage.image = newValue?.image
+            let imageString = newValue?.image
+            let image = UIImage(contentsOfFile: imageString!)
+            //itemImage.image = newValue?.image
         }
     }
     

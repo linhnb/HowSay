@@ -11,6 +11,6 @@ import CoreData
 
 class Word: NSObject {
     var keyword = String()//[NSManagedObject]()
-    var image = UIImage()//[NSManagedObject]()
+    var image = String()//[NSManagedObject]()
     //var audio = //[NSManagedObject]()
 }

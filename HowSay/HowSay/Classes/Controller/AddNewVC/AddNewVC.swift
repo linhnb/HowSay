@@ -22,6 +22,9 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     
     
     
+    var imageFileURL: NSURL!
+    var imageFilePath: String!
+    
     var soundFileURL: NSURL!
     var recorder: AVAudioRecorder!
     
@@ -60,6 +63,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     func endRecord() {
         print("end record")
         recorder.stop()
+        print(soundFileURL)
     }
     
     @IBAction func touchRecord(sender: AnyObject) {
@@ -115,8 +119,8 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         
         //3
         word.setValue(keyWordTextFiled.text, forKey: "keyword")
-        let imageData = UIImageJPEGRepresentation(chooseImage, 1.0)
-        word.setValue(imageData, forKey: "image")
+        //let imageData = UIImageJPEGRepresentation(chooseImage, 1.0)
+        word.setValue(imageFilePath, forKey: "image")
         //word.setValue(chooseImage, forKey: "image")
         //4 
         var error: NSError?
@@ -215,11 +219,28 @@ extension AddNewVC {
             chooseImage = pickerImage
             viewImageItemImage.image = chooseImage
             viewImageButton.hidden = true
+            self.saveImage()
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func saveImage() {
+        var error: NSError?
+        var fomat = NSDateFormatter()
+        fomat.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+        var currentFileName = "image-\(fomat.stringFromDate(NSDate())).png"
+        print(currentFileName)
+        
+        var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        var docDir: AnyObject = dirPaths[0]
+        imageFilePath = docDir.stringByAppendingPathComponent(currentFileName)
+        imageFileURL = NSURL(fileURLWithPath: imageFilePath)
+        print(imageFilePath)
+        UIImagePNGRepresentation(chooseImage).writeToFile(imageFilePath, atomically: true)
+        
     }
 }
