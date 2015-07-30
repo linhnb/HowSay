@@ -19,7 +19,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var actionSheet = UIActionSheet()
      var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
-    var listSelect: NSMutableArray!
+    var listSelecteds = [Word]()
     var numberOfCell = 0
     @IBOutlet weak var playButton: UIButton!
     
@@ -38,7 +38,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
         mainScreen = UIScreen.mainScreen().bounds
-        listSelect = NSMutableArray()
         playButton.hidden = true
         
     }
@@ -74,11 +73,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         for item in arrayWord {
             let keyWord = item.valueForKey("keyword") as! String
             let image = item.valueForKey("image") as! String
+            let audio = item.valueForKey("audio") as! String
             //let audioData: NSData = item.valueForKey("audio") as! NSData
             
             let word = Word()
             word.keyword = keyWord
             word.image = image//UIImage(data: imageData)!
+            word.audio = audio
             words.append(word)
         }
     }
@@ -91,6 +92,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
+    @IBAction func touchPlay(sender: AnyObject) {
+        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
+        detail.listSelecteds = listSelecteds
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
     //MARK:- addNewCell Delegate
     func addNewCellDelegatePushToAddView() {
@@ -157,12 +163,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         actionSheet.showInView(self.view)
     }
 
-    @IBAction func playTouch(sender: UIButton) {
-        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
-        self.navigationController?.pushViewController(detail, animated: true)
-    }
-    
-
 }
 
 //MARK: - UICollectionViewDelegate
@@ -189,11 +189,17 @@ extension HomeVC {
             let word = words[indexPath.row]
             cell.word = word
             // checked items
-            if findObject(indexPath.item) {
+            
+            if(contains(listSelecteds, cell.word!)) {
                 cell.setHidenChecked(false)
             } else {
                 cell.setHidenChecked(true)
             }
+//            if findObject(indexPath.item) {
+//                cell.setHidenChecked(false)
+//            } else {
+//                cell.setHidenChecked(true)
+//            }
             return cell
         }
         
@@ -204,33 +210,45 @@ extension HomeVC {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView .cellForItemAtIndexPath(indexPath) as! HomeCell
         
-        if findObject(indexPath.item) {
-            listSelect.removeObject(indexPath.item)
+        if (contains(listSelecteds, cell.word!)) {
+            listSelecteds.removeAtIndex(indexPath.item)
             cell.setHidenChecked(true)
-            if listSelect.count == 0 {
+            if listSelecteds.count == 0 {
                 playButton.hidden = true
             }
         } else {
-            listSelect.addObject(indexPath.item)
+            listSelecteds.append(cell.word!)
             cell.setHidenChecked(false)
             playButton.hidden = false
+
         }
+//        if findObject(indexPath.item) {
+//            listSelecteds.removeAtIndex(indexPath.item)
+//            cell.setHidenChecked(true)
+//            if listSelecteds.count == 0 {
+//                playButton.hidden = true
+//            }
+//        } else {
+//            listSelecteds.append(cell)
+//            cell.setHidenChecked(false)
+//            playButton.hidden = false
+//        }
         
     }
     
-    func findObject(value: Int)-> Bool {
-        var count = listSelect.count
-        if count <= 0 {
-            return false
-        }
-        for var i = 0; i < listSelect.count; i++ {
-            if (listSelect.objectAtIndex(i) as! Int) == value {
-                return true
-            }
-        }
-        return false
-    }
-    
+//    func findObject(value: Int)-> Bool {
+//        var count = listSelecteds.count
+//        if count <= 0 {
+//            return false
+//        }
+//        for var i = 0; i < listSelecteds.count; i++ {
+//            if (listSelecteds.objectAtIndex(i) as! Int) == value {
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//    
 }
 
 //MARK: - UIpickerControllerDelegate

@@ -19,6 +19,7 @@ import UIKit
     @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
+    var listSelecteds = [Word]()
     @IBOutlet weak var viewContent: UIView!
     var position: CGFloat!
     
@@ -34,11 +35,13 @@ import UIKit
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         scrollContent.pagingEnabled = true
-        scrollContent.contentSize = CGSize(width: self.view.frame.size.width * 4, height: viewContent.frame.size.height)
-        for var i:CGFloat = 0; i < 4; i++ {
+        scrollContent.contentSize = CGSize(width: CGFloat (self.view.frame.size.width * CGFloat(( listSelecteds.count ))), height: viewContent.frame.size.height)
+        for var i = 0; i <  listSelecteds.count ; i++ {
             var detail: Detail!
             detail = NSBundle.mainBundle().loadNibNamed("Detail", owner: self, options: nil)[0] as! Detail
-            detail.frame = CGRect(x: self.view.frame.size.width * i, y: 0, width: viewContent.frame.size.width, height: viewContent.frame.size.height)
+            detail.frame = CGRect(x: CGFloat (self.view.frame.size.width * CGFloat( i )), y: CGFloat(0), width: CGFloat(viewContent.frame.size.width), height: CGFloat(viewContent.frame.size.height))
+            let word: Word = listSelecteds[i] as Word
+            detail.word = word
             scrollContent.addSubview(detail)
         }
     }

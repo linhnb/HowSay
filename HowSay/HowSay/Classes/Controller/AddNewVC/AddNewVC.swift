@@ -26,6 +26,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     var imageFilePath: String!
     
     var soundFileURL: NSURL!
+    var soundFilePath: String!
     var recorder: AVAudioRecorder!
     
     var actionSheet = UIActionSheet()
@@ -86,7 +87,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var docsDir: AnyObject = dirPaths[0]
-        var soundFilePath = docsDir.stringByAppendingPathComponent(currentFileName)
+        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileName)
         soundFileURL = NSURL(fileURLWithPath: soundFilePath)
         print(soundFileURL)
         recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
@@ -121,6 +122,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         word.setValue(keyWordTextFiled.text, forKey: "keyword")
         //let imageData = UIImageJPEGRepresentation(chooseImage, 1.0)
         word.setValue(imageFilePath, forKey: "image")
+        word.setValue(soundFilePath, forKey: "audio")
         //word.setValue(chooseImage, forKey: "image")
         //4 
         var error: NSError?
