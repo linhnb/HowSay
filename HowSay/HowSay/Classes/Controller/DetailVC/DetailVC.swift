@@ -78,7 +78,7 @@ import AVFoundation
         
         let audioURL = NSURL(fileURLWithPath: audioString)
         
-        let urlPlay = "/Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/0E34A577-756B-4A72-A575-68FBCE12D25D/Documents/recording-2015-07-30-16-56-47.m4aend recordfile:///Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/0E34A577-756B-4A72-A575-68FBCE12D25D/Documents/recording-2015-07-30-16-56-46.m4a"
+        let urlPlay = "/Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/0E34A577-756B-4A72-A575-68FBCE12D25D/Documents/recording-2015-07-30-16-56-46.m4a"
         var url = NSURL(string: urlPlay)
         var player = AVPlayer(URL: url)
         player.play()
