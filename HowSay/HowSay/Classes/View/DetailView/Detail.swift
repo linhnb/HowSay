@@ -24,15 +24,16 @@ class Detail: UIView {
             var error: NSError?
             let csvContent = NSString(contentsOfFile: imageString, encoding:NSUTF8StringEncoding, error: &error)
             if csvContent != nil {
-                imvImage.image = UIImage(contentsOfFile: imageString)
+                println("error: \(error)")
+                
             }
             else {
-                println("error: \(error)")
+                imvImage.image = UIImage(contentsOfFile: imageString)
             }
             
             var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
             var docDir: AnyObject = dirPaths[0]
-            let path = docDir.stringByAppendingPathComponent("image-2015-07-30-16-54-35.png")
+            let path = docDir.stringByAppendingPathComponent("image-2015-07-31-08-52-15.png")
             
             print("ami1:  \(path)")
             print("ami2:  \(imageString)")

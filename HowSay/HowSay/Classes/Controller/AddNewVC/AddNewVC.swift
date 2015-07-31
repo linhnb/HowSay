@@ -240,7 +240,7 @@ extension AddNewVC {
         var currentFileName = "image-\(fomat.stringFromDate(NSDate())).png"
         print("amilaza1 \(currentFileName)")
         
-        var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var docDir: AnyObject = dirPaths[0]
         imageFilePath = docDir.stringByAppendingPathComponent(currentFileName)
         imageFileURL = NSURL(fileURLWithPath: imageFilePath)
