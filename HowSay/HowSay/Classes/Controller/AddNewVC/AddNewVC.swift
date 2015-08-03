@@ -59,30 +59,49 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         // Dispose of any resources that can be recreated.
     }
     func startRecord() {
-        print("start record")
+//        print("start record")
+//        var session = AVAudioSession.sharedInstance()
+//        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+//        var recordSettings:[NSObject: AnyObject] = [
+//            AVFormatIDKey: kAudioFormatAppleLossless,
+//            AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
+//            AVEncoderBitRateKey : 128000,
+//            AVNumberOfChannelsKey: 2,
+//            AVSampleRateKey : 44100.0
+//        ]
+//        var error: NSError?
+//        
+//        var format = NSDateFormatter()
+//        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
+//        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).wav"
+//        println(currentFileNameRecord)
+//        
+//        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
+//        var docsDir: AnyObject = dirPaths[0]
+//        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileNameRecord)
+//        soundFileURL = NSURL(fileURLWithPath: soundFilePath)
+//        print(soundFileURL)
+//        recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
+//        recorder.record()
+        
+        let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        currentFileNameRecord = formatter.stringFromDate(currentDateTime)+".wav"
+        let pathArray = [dirPath, currentFileNameRecord]
+        let filePath = NSURL.fileURLWithPathComponents(pathArray)
+        println(filePath)
+        
         var session = AVAudioSession.sharedInstance()
         session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
-        var recordSettings:[NSObject: AnyObject] = [
-            AVFormatIDKey: kAudioFormatAppleLossless,
-            AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
-            AVEncoderBitRateKey : 128000,
-            AVNumberOfChannelsKey: 2,
-            AVSampleRateKey : 44100.0
-        ]
-        var error: NSError?
-        
-        var format = NSDateFormatter()
-        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).wav"
-        println(currentFileNameRecord)
-        
-        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        var docsDir: AnyObject = dirPaths[0]
-        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileNameRecord)
-        soundFileURL = NSURL(fileURLWithPath: soundFilePath)
-        print(soundFileURL)
-        recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
+        recorder = AVAudioRecorder(URL: filePath, settings: nil, error: nil)
+        recorder.delegate = self
+        recorder.meteringEnabled = true;
+        recorder.prepareToRecord()
         recorder.record()
+
     }
     
     func endRecord() {
