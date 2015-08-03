@@ -95,6 +95,9 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         print("Touch Record")
         recordButton.selected = !recordButton.selected
         
+        var audioSession:AVAudioSession = AVAudioSession.sharedInstance()
+        audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
+        audioSession.setActive(true, error: nil)
         if(recordButton.selected == true) {
             self.startRecord()
         } else {
