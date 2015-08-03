@@ -60,6 +60,8 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     func startRecord() {
         print("start record")
+        var session = AVAudioSession.sharedInstance()
+        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
         var recordSettings:[NSObject: AnyObject] = [
             AVFormatIDKey: kAudioFormatAppleLossless,
             AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
@@ -71,7 +73,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         
         var format = NSDateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).m4a"
+        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).wav"
         println(currentFileNameRecord)
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
