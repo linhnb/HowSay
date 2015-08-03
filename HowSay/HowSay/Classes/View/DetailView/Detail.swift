@@ -21,23 +21,18 @@ class Detail: UIView {
             if (newValue?.image != nil) {
                 imageString = newValue!.image
             }
-            var error: NSError?
-            let csvContent = NSString(contentsOfFile: imageString, encoding:NSUTF8StringEncoding, error: &error)
-            if csvContent != nil {
-                println("error: \(error)")
-                
-            }
-            else {
-                imvImage.image = UIImage(contentsOfFile: imageString)
-            }
             
-            var dirPaths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-            var docDir: AnyObject = dirPaths[0]
-            let path = docDir.stringByAppendingPathComponent("image-2015-07-31-08-52-15.png")
-            
-            print("ami1:  \(path)")
-            print("ami2:  \(imageString)")
-            //imvImage.image = UIImage(contentsOfFile: path)
+            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+            let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
+            if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
+                    if paths.count > 0 {
+                        if let dirPath = paths[0] as? String {
+                            let readPath = dirPath.stringByAppendingPathComponent(imageString)
+                            let image    = UIImage(contentsOfFile: readPath)
+                            imvImage.image = image
+                        }
+                    }
+            }
         }
     }
     override func awakeFromNib() {

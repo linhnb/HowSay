@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC" customModule="HowSay" customModuleProvider="target">
@@ -24,15 +25,18 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="PrP-UO-ARK">
                             <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="PrP-UO-ARK" secondAttribute="height" multiplier="142:21" id="tb7-aH-hVK"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="PrP-UO-ARK" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="top" id="5Qe-8E-HpR"/>
-                        <constraint firstAttribute="bottom" secondItem="PrP-UO-ARK" secondAttribute="bottom" id="TG5-l2-SC4"/>
-                        <constraint firstAttribute="height" constant="84" id="aVS-Gc-yiv"/>
-                        <constraint firstItem="PrP-UO-ARK" firstAttribute="leading" secondItem="dDj-0i-FUu" secondAttribute="leading" id="sm3-pu-MzN"/>
-                        <constraint firstAttribute="trailing" secondItem="PrP-UO-ARK" secondAttribute="trailing" id="tOX-TT-caV"/>
+                        <constraint firstAttribute="width" secondItem="dDj-0i-FUu" secondAttribute="height" multiplier="142:21" id="2gB-ab-IhU"/>
+                        <constraint firstAttribute="bottom" secondItem="PrP-UO-ARK" secondAttribute="bottom" id="9S2-Kt-eb0"/>
+                        <constraint firstItem="PrP-UO-ARK" firstAttribute="leading" secondItem="dDj-0i-FUu" secondAttribute="leading" id="T3E-52-a9p"/>
+                        <constraint firstAttribute="trailing" secondItem="PrP-UO-ARK" secondAttribute="trailing" id="XwS-gd-Gn1"/>
+                        <constraint firstItem="PrP-UO-ARK" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="top" id="bj3-0l-IJg"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qMp-Hi-uRL">
@@ -67,21 +71,21 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="uAx-Bw-2Jn" secondAttribute="trailing" id="4Qj-7g-Kfs"/>
                 <constraint firstAttribute="bottom" secondItem="Apz-WH-s4u" secondAttribute="bottom" id="B6a-HV-ZfH"/>
+                <constraint firstItem="qMp-Hi-uRL" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="bottom" id="Dal-4V-A6w"/>
+                <constraint firstItem="dDj-0i-FUu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IkR-ge-Cyj"/>
                 <constraint firstAttribute="trailing" secondItem="qMp-Hi-uRL" secondAttribute="trailing" id="LDR-tK-6OM"/>
-                <constraint firstItem="dDj-0i-FUu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PWe-qe-Fy5"/>
-                <constraint firstAttribute="trailing" secondItem="dDj-0i-FUu" secondAttribute="trailing" id="QDx-v0-EQQ"/>
-                <constraint firstItem="dDj-0i-FUu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VEG-LK-3c1"/>
+                <constraint firstItem="dDj-0i-FUu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RSW-Rt-N1z"/>
                 <constraint firstAttribute="bottom" secondItem="qMp-Hi-uRL" secondAttribute="bottom" id="Yiy-4s-hd6"/>
                 <constraint firstAttribute="trailing" secondItem="Apz-WH-s4u" secondAttribute="trailing" id="ZXL-do-XEs"/>
                 <constraint firstItem="qMp-Hi-uRL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bzt-1d-BVC"/>
                 <constraint firstItem="uAx-Bw-2Jn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c8T-GB-QdQ"/>
                 <constraint firstAttribute="bottom" secondItem="uAx-Bw-2Jn" secondAttribute="bottom" id="r3d-k8-W0a"/>
-                <constraint firstItem="qMp-Hi-uRL" firstAttribute="top" secondItem="dDj-0i-FUu" secondAttribute="bottom" id="vyQ-et-cEK"/>
                 <constraint firstItem="uAx-Bw-2Jn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ws3-1J-y2D"/>
+                <constraint firstAttribute="trailing" secondItem="dDj-0i-FUu" secondAttribute="trailing" id="xxe-es-DIv"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="385" y="390"/>
+            <point key="canvasLocation" x="305" y="275"/>
         </view>
     </objects>
     <resources>

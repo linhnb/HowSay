@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import AVFoundation
 
-class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate {
+class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate {
 
     @IBOutlet weak var viewImageItemImage: UIImageView!
     @IBOutlet weak var viewImageBackGroundImage: UIImageView!
@@ -24,9 +24,11 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     
     var imageFileURL: NSURL!
     var imageFilePath: String!
+    var currentFileNameImage: String!
     
     var soundFileURL: NSURL!
     var soundFilePath: String!
+    var currentFileNameRecord: String!
     var recorder: AVAudioRecorder!
     
     var actionSheet = UIActionSheet()
@@ -58,19 +60,6 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     func startRecord() {
         print("start record")
-        recorder.record()
-    }
-    
-    func endRecord() {
-        print("end record")
-        recorder.stop()
-        print(soundFileURL)
-    }
-    
-    @IBAction func touchRecord(sender: AnyObject) {
-        print("Touch Record")
-        
-        
         var recordSettings:[NSObject: AnyObject] = [
             AVFormatIDKey: kAudioFormatAppleLossless,
             AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
@@ -82,27 +71,34 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         
         var format = NSDateFormatter()
         format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-        var currentFileName = "recording-\(format.stringFromDate(NSDate())).m4a"
-        println(currentFileName)
+        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).m4a"
+        println(currentFileNameRecord)
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var docsDir: AnyObject = dirPaths[0]
-        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileName)
+        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileNameRecord)
         soundFileURL = NSURL(fileURLWithPath: soundFilePath)
         print(soundFileURL)
         recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
-        recorder.prepareToRecord()
-        
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setURL(soundFileURL, forKey: "audio")
-        
-        
+        recorder.record()
+    }
+    
+    func endRecord() {
+        print("end record")
+        recorder.stop()
+        print(soundFileURL)
+    }
+    
+    @IBAction func touchRecord(sender: AnyObject) {
+        print("Touch Record")
         recordButton.selected = !recordButton.selected
+        
         if(recordButton.selected == true) {
             self.startRecord()
         } else {
             self.endRecord()
         }
+        
     }
     @IBAction func touchChooseImage(sender: AnyObject) {
         detailView.frame = constaintDetailFrame!
@@ -122,10 +118,23 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         let word = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
         //3
-        word.setValue(keyWordTextFiled.text, forKey: "keyword")
-        //let imageData = UIImageJPEGRepresentation(chooseImage, 1.0)
-        word.setValue(imageFilePath, forKey: "image")
-        word.setValue(soundFilePath, forKey: "audio")
+        if (count(keyWordTextFiled.text) > 0) {
+            word.setValue(keyWordTextFiled.text, forKey: "keyword")
+        } else {
+            word.setValue("", forKey: "keyword")
+        }
+        if (count(currentFileNameImage) > 0) {
+            word.setValue(currentFileNameImage, forKey: "image")
+        } else {
+            word.setValue("", forKey: "image")
+        }
+        if (count(currentFileNameRecord) > 0) {
+            word.setValue(currentFileNameRecord, forKey: "audio")
+        } else {
+            word.setValue("", forKey: "audio")
+        }
+        
+        
         //word.setValue(chooseImage, forKey: "image")
         //4 
         var error: NSError?
@@ -237,12 +246,12 @@ extension AddNewVC {
         var error: NSError?
         var fomat = NSDateFormatter()
         fomat.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-        var currentFileName = "image-\(fomat.stringFromDate(NSDate())).png"
-        print("amilaza1 \(currentFileName)")
+        currentFileNameImage = "image-\(fomat.stringFromDate(NSDate())).png"
+        print("amilaza1 \(currentFileNameImage)")
         
         var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         var docDir: AnyObject = dirPaths[0]
-        imageFilePath = docDir.stringByAppendingPathComponent(currentFileName)
+        imageFilePath = docDir.stringByAppendingPathComponent(currentFileNameImage)
         imageFileURL = NSURL(fileURLWithPath: imageFilePath)
         print("amilaza2 \(imageFilePath)")
         UIImagePNGRepresentation(chooseImage).writeToFile(imageFilePath, atomically: true)

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
  
- class DetailVC: UIViewController, UIScrollViewDelegate {
+ class DetailVC: UIViewController, UIScrollViewDelegate{
     
     @IBOutlet weak var scrollContent: UIScrollView!
     
@@ -22,16 +22,23 @@ import AVFoundation
     
     var listSelecteds = [Word]()
     var listAudio = [String]()
+    var player: AVPlayer!
     @IBOutlet weak var viewContent: UIView!
-    var position: CGFloat!
+    var position: Int!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         position = 0
         preButton.hidden = true
         scrollContent.delegate = self
         
+        if(listSelecteds.count == 1) {
+            preButton.hidden = true
+            nextButton.hidden = true
+        }
+        playButton.selected = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -55,7 +62,6 @@ import AVFoundation
     }
     
     
-    
     @IBAction func preTouch(sender: AnyObject) {
         print("pre touch")
         nextButton.hidden = false
@@ -66,47 +72,55 @@ import AVFoundation
         }
         position = position - 1
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * self.position, y: 0)
+            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * CGFloat( self.position), y: 0)
         })
     }
+    func playerDidFinishPlaying() {
+        playButton.selected = false
+    }
     @IBAction func playTouch(sender: AnyObject) {
+        playButton.selected = !playButton.selected
+        
         print("Play Audio")
-        let audioString = listAudio[0]
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let name = defaults.URLForKey("audio")
-        
-        let audioURL = NSURL(fileURLWithPath: audioString)
-        
-        let urlPlay = "/Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/0E34A577-756B-4A72-A575-68FBCE12D25D/Documents/recording-2015-07-30-16-56-46.m4a"
-        var url = NSURL(string: urlPlay)
-        var player = AVPlayer(URL: url)
-        player.play()
-        //"/Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/6F457C00-18C0-4640-A1AD-186E2E6EEDAE/Documents/recording-2015-07-30-15-59-48.m4a"
-        //"/Users/asiantech/Library/Developer/CoreSimulator/Devices/3727F222-AA36-4A0C-9FBC-C43391838785/data/Containers/Data/Application/E2B35408-0EA1-4D68-B468-0E2D807F8CAF/Documents/recording-2015-07-30-15-59-44.m4a"
+        let audioString = listAudio[position]
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
+        if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
+            if paths.count > 0 {
+                if let dirPath = paths[0] as? String {
+                    let readPath = dirPath.stringByAppendingPathComponent(audioString)
+                    let audioURL = NSURL(fileURLWithPath: readPath)
+                    player = AVPlayer(URL: audioURL)
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+                    player.play()
+                }
+            }
+        }
     }
     @IBAction func nextTouch(sender: AnyObject) {
         print("next touch")
         preButton.hidden = false
-        if position > 2 {
+        if position > 1 {
             nextButton.hidden = true
             return
         }
         position = position + 1
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * self.position, y: 0)
+            self.scrollContent.contentOffset = CGPoint(x: self.view.frame.size.width * CGFloat( self.position), y: 0)
         })
     }
     @IBAction func repeatTouch(sender: AnyObject) {
         
     }
     @IBAction func backTouch(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        let home = HomeVC(nibName: "HomeVC", bundle: nil)
+        self.navigationController?.pushViewController(home, animated: false)
+        //self.navigationController?.popViewControllerAnimated(true)
     }
     
     // Scroll View Delegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        position = scrollView.contentOffset.x / viewContent.frame.size.width
+        position = Int (scrollView.contentOffset.x / viewContent.frame.size.width)
         
         if position == 0 {
             preButton.hidden = true
