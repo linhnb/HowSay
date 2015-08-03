@@ -15,12 +15,22 @@ class HomeCell: UICollectionViewCell {
     @IBOutlet weak var checkedImage: UIImageView!
     var word: Word? {
         willSet {
-            //itemImage.image = newValue.valueForKey("image")
-            //let imageData = newValue?.image //newValue!.valueForKey("image") as! NSData
-            //let image = //UIImage(data: imageData)
-            let imageString = newValue?.image
-            let image = UIImage(contentsOfFile: imageString!)
-            //itemImage.image = newValue?.image
+            var imageString = String()
+            
+            if (newValue?.image != nil) {
+                imageString = newValue!.image
+            }
+            let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+            let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
+            if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
+                if paths.count > 0 {
+                    if let dirPath = paths[0] as? String {
+                        let readPath = dirPath.stringByAppendingPathComponent(imageString)
+                        let image    = UIImage(contentsOfFile: readPath)
+                        itemImage.image = image
+                    }
+                }
+            }
         }
     }
     
