@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
@@ -19,11 +20,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var actionSheet = UIActionSheet()
      var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
-    var listSelecteds = [Word]()
+    var listSelecteds = [WordObject]()
     var numberOfCell = 0
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
-    var words = [Word]()
+    var words = [WordObject]()
+    var wordManagedObjects = [NSManagedObject]()
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -39,12 +42,21 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
         mainScreen = UIScreen.mainScreen().bounds
         playButton.hidden = true
+        deleteButton.hidden = true
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.loadData()
+    }
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+    }
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    func loadData() {
         //1
         let appDelegate =
         UIApplication.sharedApplication().delegate as! AppDelegate
@@ -62,26 +74,64 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             error: &error) as? [NSManagedObject]
         
         if let results = fetchedResults {
-            let array: [NSManagedObject]  = results
-            self.parseDataFromArray(array)
+            wordManagedObjects = results
+            self.parseDataFromArray(wordManagedObjects)
         } else {
             println("Could not fetch \(error), \(error!.userInfo)")
         }
     }
     
     func parseDataFromArray (arrayWord: NSArray) {
+        words.removeAll(keepCapacity: true)
         for item in arrayWord {
-            let keyWord = item.valueForKey("keyword") as! String
-            let image = item.valueForKey("image") as! String
-            let audio = item.valueForKey("audio") as! String
+            var keyWord = ""
+            var image = ""
+            var audio = ""
+            if (item.valueForKey("keyword") != nil) {
+                keyWord = item.valueForKey("keyword") as! String
+            }
+            
+            if (item.valueForKey("image") != nil) {
+                image = item.valueForKey("image") as! String
+            }
+            
+            if (item.valueForKey("audio") != nil){
+                audio = item.valueForKey("audio") as! String
+            }
+            
             //let audioData: NSData = item.valueForKey("audio") as! NSData
             
-            let word = Word()
+            let word = WordObject()
             word.keyword = keyWord
             word.image = image//UIImage(data: imageData)!
             word.audio = audio
             words.append(word)
         }
+    }
+    
+    func parseDataFromObject(#item: NSManagedObject) -> WordObject {
+        let word: WordObject = WordObject()
+        
+        var keyWord = ""
+        var image = ""
+        var audio = ""
+        if (item.valueForKey("keyword") != nil) {
+            keyWord = item.valueForKey("keyword") as! String
+        }
+        
+        if (item.valueForKey("image") != nil) {
+            image = item.valueForKey("image") as! String
+        }
+        
+        if (item.valueForKey("audio") != nil){
+            audio = item.valueForKey("audio") as! String
+        }
+        //let audioData: NSData = item.valueForKey("audio") as! NSData
+        
+        word.keyword = keyWord
+        word.image = image//UIImage(data: imageData)!
+        word.audio = audio
+        return word
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -92,10 +142,50 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
+    //MARK: - button Action.
+    
+    @IBAction func touchDelete(sender: AnyObject) {
+        self.removeWordFromCoreData(wordDeletes: listSelecteds)
+    }
     @IBAction func touchPlay(sender: AnyObject) {
         let detail = DetailVC(nibName: "DetailVC", bundle: nil)
         detail.listSelecteds = listSelecteds
         self.navigationController?.pushViewController(detail, animated: true)
+    }
+    
+    func removeWordFromCoreData(#wordDeletes: [WordObject]) {
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext!
+        
+        var i = 0
+        for(i = 0; i < wordDeletes.count ; i++) {
+            var isChange = false
+            let wordDelete = wordDeletes[i]
+            var j = 0
+            for (j = 0; j < wordManagedObjects.count; j++) {
+                let word =  self.parseDataFromObject(item: wordManagedObjects[j] )
+                if( (wordDelete.keyword == word.keyword) && (wordDelete.image == word.image) && (word.audio == wordDelete.audio)) {
+                    managedContext.deleteObject(wordManagedObjects[i])
+                    var savingError: NSError?
+                    if managedContext.save(&savingError){
+                        println("Successfully saved the context")
+                        isChange = true
+                    } else {
+                        if let error = savingError{
+                            println("Failed to save the context. Error = \(error)")
+                        }
+                    }
+                }
+                if((i == wordDeletes.count - 1) && (isChange == true)) {
+                    self.loadData()
+                    homeCollectionView.reloadData()
+                    playButton.hidden = true
+                    deleteButton.hidden = true
+                }
+            }
+            
+        }
+        
     }
     
     //MARK:- addNewCell Delegate
@@ -211,44 +301,31 @@ extension HomeVC {
         var cell = collectionView .cellForItemAtIndexPath(indexPath) as! HomeCell
         
         if (contains(listSelecteds, cell.word!)) {
-            listSelecteds.removeAtIndex(indexPath.item)
-            cell.setHidenChecked(true)
-            if listSelecteds.count == 0 {
-                playButton.hidden = true
+            var i = 0
+            for (i = 0; i < listSelecteds.count; i++) {
+                let word = listSelecteds[i] as WordObject
+                if (word == cell.word) {
+                    listSelecteds.removeAtIndex(i)
+                    cell.setHidenChecked(true)
+                    if listSelecteds.count == 0 {
+                        playButton.hidden = true
+                        deleteButton.hidden = true
+                    }
+                }
             }
         } else {
             listSelecteds.append(cell.word!)
             cell.setHidenChecked(false)
             playButton.hidden = false
-
+            deleteButton.hidden = false
         }
-//        if findObject(indexPath.item) {
-//            listSelecteds.removeAtIndex(indexPath.item)
-//            cell.setHidenChecked(true)
-//            if listSelecteds.count == 0 {
-//                playButton.hidden = true
-//            }
-//        } else {
-//            listSelecteds.append(cell)
-//            cell.setHidenChecked(false)
-//            playButton.hidden = false
-//        }
-        
+        if(listSelecteds.count == 0) {
+            playButton.hidden = true
+            deleteButton.hidden = true
+        }
     }
     
-//    func findObject(value: Int)-> Bool {
-//        var count = listSelecteds.count
-//        if count <= 0 {
-//            return false
-//        }
-//        for var i = 0; i < listSelecteds.count; i++ {
-//            if (listSelecteds.objectAtIndex(i) as! Int) == value {
-//                return true
-//            }
-//        }
-//        return false
-//    }
-//    
+
 }
 
 //MARK: - UIpickerControllerDelegate
@@ -302,7 +379,29 @@ extension HomeVC {
 }
 
 
+extension UINavigationController {
+    public override func supportedInterfaceOrientations() -> Int {
+        return visibleViewController.supportedInterfaceOrientations()
+    }
+    public override func shouldAutorotate() -> Bool {
+        return visibleViewController.shouldAutorotate()
+    }
+}
 
+extension UITabBarController {
+    public override func supportedInterfaceOrientations() -> Int {
+        if let selected = selectedViewController {
+            return selected.supportedInterfaceOrientations()
+        }
+        return super.supportedInterfaceOrientations()
+    }
+    public override func shouldAutorotate() -> Bool {
+        if let selected = selectedViewController {
+            return selected.shouldAutorotate()
+        }
+        return super.shouldAutorotate()
+    }
+}
 
 
 

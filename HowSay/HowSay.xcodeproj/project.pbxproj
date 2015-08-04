@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		822D06D31B68B83900D6DF8A /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822D06D21B68B83900D6DF8A /* Word.swift */; };
 		823BC0D91B5F7334007B3957 /* HowSayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0D81B5F7334007B3957 /* HowSayTests.swift */; };
 		823BC0F41B5F7496007B3957 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823BC0E41B5F7496007B3957 /* AppDelegate.swift */; };
 		825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 825A44E81B66211B0095952B /* HomeVC~ipad.swift */; };
 		825A44EB1B66211B0095952B /* HomeVC~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 825A44E91B66211B0095952B /* HomeVC~ipad.xib */; };
+		82A211091B705385004A0457 /* WordObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A211081B705385004A0457 /* WordObject.swift */; };
 		82A889251B673C02008B049C /* AddNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A889231B673C02008B049C /* AddNewVC.swift */; };
 		82A889261B673C02008B049C /* AddNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A889241B673C02008B049C /* AddNewVC.xib */; };
 		82A8892F1B674104008B049C /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A8892D1B674104008B049C /* Detail.swift */; };
@@ -47,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		822D06D21B68B83900D6DF8A /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		823BC0BA1B5F7333007B3957 /* HowSay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HowSay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		823BC0BE1B5F7333007B3957 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823BC0D21B5F7334007B3957 /* HowSayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HowSayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +55,7 @@
 		823BC0E41B5F7496007B3957 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		825A44E81B66211B0095952B /* HomeVC~ipad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HomeVC~ipad.swift"; sourceTree = "<group>"; };
 		825A44E91B66211B0095952B /* HomeVC~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "HomeVC~ipad.xib"; sourceTree = "<group>"; };
+		82A211081B705385004A0457 /* WordObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WordObject.swift; path = ../../../../../../Documents/WordObject.swift; sourceTree = "<group>"; };
 		82A889231B673C02008B049C /* AddNewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewVC.swift; sourceTree = "<group>"; };
 		82A889241B673C02008B049C /* AddNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddNewVC.xib; sourceTree = "<group>"; };
 		82A8892D1B674104008B049C /* Detail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		822D06D11B68B82200D6DF8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				822D06D21B68B83900D6DF8A /* Word.swift */,
+				82A211081B705385004A0457 /* WordObject.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -466,10 +466,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				822D06D31B68B83900D6DF8A /* Word.swift in Sources */,
 				82BD3D071B60D56600B733EC /* AddNewCell.swift in Sources */,
 				82C68EA01B5F7716004C6AA8 /* ViewController.swift in Sources */,
 				82A8892F1B674104008B049C /* Detail.swift in Sources */,
+				82A211091B705385004A0457 /* WordObject.swift in Sources */,
 				825A44EA1B66211B0095952B /* HomeVC~ipad.swift in Sources */,
 				82BD3D0B1B60DB4200B733EC /* AddView.swift in Sources */,
 				82BD3CFD1B60A8F100B733EC /* HomeCell.swift in Sources */,

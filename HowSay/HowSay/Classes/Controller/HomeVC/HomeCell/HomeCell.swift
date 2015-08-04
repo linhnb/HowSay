@@ -13,7 +13,7 @@ class HomeCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var backGroundImage: UIImageView!
     @IBOutlet weak var checkedImage: UIImageView!
-    var word: Word? {
+    var word: WordObject? {
         willSet {
             var imageString = String()
             

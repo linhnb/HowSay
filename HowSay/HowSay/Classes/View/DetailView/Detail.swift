@@ -13,7 +13,7 @@ class Detail: UIView {
     @IBOutlet weak var imvImage: UIImageView!
     @IBOutlet weak var btnName: UIButton!
     
-    var word: Word? {
+    var word: WordObject? {
         willSet{
             btnName.setTitle(newValue?.keyword, forState: UIControlState.Normal)
             var imageString = String()
