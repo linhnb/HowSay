@@ -20,7 +20,7 @@ import AVFoundation
     @IBOutlet weak var preButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     
-    var listSelecteds = [Word]()
+    var listSelecteds = [WordObject]()
     var listAudio = [String]()
     var player: AVPlayer!
     @IBOutlet weak var viewContent: UIView!
@@ -29,6 +29,7 @@ import AVFoundation
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         position = 0
         preButton.hidden = true
@@ -39,6 +40,7 @@ import AVFoundation
             nextButton.hidden = true
         }
         playButton.selected = false
+        repeatButton.selected = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,18 +51,28 @@ import AVFoundation
             var detail: Detail!
             detail = NSBundle.mainBundle().loadNibNamed("Detail", owner: self, options: nil)[0] as! Detail
             detail.frame = CGRect(x: CGFloat (self.view.frame.size.width * CGFloat( i )), y: CGFloat(0), width: CGFloat(viewContent.frame.size.width), height: CGFloat(viewContent.frame.size.height))
-            let word: Word = listSelecteds[i] as Word
+            let word: WordObject = listSelecteds[i] as WordObject
             detail.word = word
             listAudio.append(word.audio)
             scrollContent.addSubview(detail)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
-    
+    override func shouldAutorotate() -> Bool {
+        return  false
+    }
+    override func supportedInterfaceOrientations() -> Int {
+        return Int(UIInterfaceOrientation.LandscapeRight.rawValue)
+    }
+    func delay() {
+        self.playTouch(playButton)
+        //nothing in my method
+    }
+    //MARK: - Action Button.
     
     @IBAction func preTouch(sender: AnyObject) {
         print("pre touch")
@@ -76,12 +88,17 @@ import AVFoundation
         })
     }
     func playerDidFinishPlaying() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
         playButton.selected = false
+        if(repeatButton.selected == true) {
+            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "delay", userInfo: nil, repeats: false)
+            
+        }
     }
     @IBAction func playTouch(sender: AnyObject) {
         playButton.selected = !playButton.selected
         
-        print("Play Audio")
+        print("Play Audio \n")
         let audioString = listAudio[position]
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
@@ -91,8 +108,9 @@ import AVFoundation
                     let readPath = dirPath.stringByAppendingPathComponent(audioString)
                     let audioURL = NSURL(fileURLWithPath: readPath)
                     player = AVPlayer(URL: audioURL)
-                    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
                     player.play()
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+                    
                 }
             }
         }
@@ -110,7 +128,13 @@ import AVFoundation
         })
     }
     @IBAction func repeatTouch(sender: AnyObject) {
-        
+        repeatButton.selected = !repeatButton.selected
+        if(repeatButton.selected == false) {
+            nextButton.hidden = false
+        } else {
+            nextButton.hidden = true
+            
+        }
     }
     @IBAction func backTouch(sender: AnyObject) {
         let home = HomeVC(nibName: "HomeVC", bundle: nil)
@@ -122,18 +146,15 @@ import AVFoundation
     func scrollViewDidScroll(scrollView: UIScrollView) {
         position = Int (scrollView.contentOffset.x / viewContent.frame.size.width)
         
-        if position == 0 {
+        if (position == 0) {
             preButton.hidden = true
         }
-        if position == 3 {
+        if (position == listSelecteds.count - 1) {
             nextButton.hidden = true
         }
-        if position >= 1 && position <= 2 {
+        if (position >= 1 && position <= listSelecteds.count - 2) {
             preButton.hidden = false
             nextButton.hidden = false
         }
     }
-    
-    
-
 }

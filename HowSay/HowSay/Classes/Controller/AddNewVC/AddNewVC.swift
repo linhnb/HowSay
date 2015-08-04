@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import AVFoundation
 
-class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate {
+class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, AVAudioRecorderDelegate, UIAlertViewDelegate {
 
     @IBOutlet weak var viewImageItemImage: UIImageView!
     @IBOutlet weak var viewImageBackGroundImage: UIImageView!
@@ -36,14 +36,17 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     var constaintDetailFrame: CGRect? = CGRect()
     let imagePicker = UIImagePickerController()
     
+    var caseAlertSelected = 0
+    var isChoosenImage = false
     override func viewDidLoad() {
         super.viewDidLoad()
         viewImageButton.hidden = false
         viewImageItemImage.backgroundColor = UIColor.whiteColor()
         viewImageItemImage.layer.cornerRadius = viewImageItemImage.frame.size.height/2
+        viewImageItemImage.clipsToBounds = true
         viewImageButton.layer.cornerRadius = viewImageButton.frame.size.height/2
         
-        constaintDetailFrame = detailView.frame
+        
         self.registerForKeyboardNotifications()
         
         actionSheet = UIActionSheet(title: "Choose Image", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles:"Take Photo", "Choose From Gallary")
@@ -51,6 +54,9 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         imagePicker.delegate = self
     }
     
+    override func viewDidAppear(animated: Bool) {
+        constaintDetailFrame = detailView.frame
+    }
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -58,37 +64,20 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+//    override func supportedInterfaceOrientations() -> Int {
+//        return Int(UIInterfaceOrientation.PortraitUpsideDown.rawValue)
+//    }
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    //MARK: - record
     func startRecord() {
-//        print("start record")
-//        var session = AVAudioSession.sharedInstance()
-//        session.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
-//        var recordSettings:[NSObject: AnyObject] = [
-//            AVFormatIDKey: kAudioFormatAppleLossless,
-//            AVEncoderAudioQualityKey : AVAudioQuality.Medium.rawValue,
-//            AVEncoderBitRateKey : 128000,
-//            AVNumberOfChannelsKey: 2,
-//            AVSampleRateKey : 44100.0
-//        ]
-//        var error: NSError?
-//        
-//        var format = NSDateFormatter()
-//        format.dateFormat="yyyy-MM-dd-HH-mm-ss"
-//        currentFileNameRecord = "recording-\(format.stringFromDate(NSDate())).wav"
-//        println(currentFileNameRecord)
-//        
-//        var dirPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-//        var docsDir: AnyObject = dirPaths[0]
-//        soundFilePath = docsDir.stringByAppendingPathComponent(currentFileNameRecord)
-//        soundFileURL = NSURL(fileURLWithPath: soundFilePath)
-//        print(soundFileURL)
-//        recorder = AVAudioRecorder(URL: soundFileURL!, settings: recordSettings, error: &error)
-//        recorder.record()
-        
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
-        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         currentFileNameRecord = formatter.stringFromDate(currentDateTime)+".wav"
         let pathArray = [dirPath, currentFileNameRecord]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
@@ -110,6 +99,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         print(soundFileURL)
     }
     
+    //MARK: - Action button.
     @IBAction func touchRecord(sender: AnyObject) {
         print("Touch Record")
         recordButton.selected = !recordButton.selected
@@ -125,53 +115,82 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         
     }
     @IBAction func touchChooseImage(sender: AnyObject) {
-        detailView.frame = constaintDetailFrame!
+        //detailView.frame = constaintDetailFrame!
         
         actionSheet.showInView(self.view)
+    }
+    func choosenImage() {
         
     }
     @IBAction func touchDone(sender: AnyObject) {
-        detailView.frame = constaintDetailFrame!
+        //detailView.frame = constaintDetailFrame!
         
-        //1
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        
-        //2
-        let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: managedContext)
-        let word = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        //3
-        if (count(keyWordTextFiled.text) > 0) {
-            word.setValue(keyWordTextFiled.text, forKey: "keyword")
+        if (count(keyWordTextFiled.text) == 0){
+            let alert = UIAlertView(title: "", message: "Please enter keyword.", delegate: self, cancelButtonTitle: "OK")
+            alert.delegate = self
+            alert.show()
+            caseAlertSelected = 1
+        } else if (isChoosenImage == false){
+            let alert = UIAlertView(title: "", message: "Please choose image.", delegate: self, cancelButtonTitle: "OK")
+            alert.delegate = self
+            alert.show()
+            caseAlertSelected = 2
+        } else if (currentFileNameRecord == nil){
+            let alert = UIAlertView(title: "", message: "Please record keyword.", delegate: self, cancelButtonTitle: "OK")
+            alert.delegate = self
+            alert.show()
+            caseAlertSelected = 3
         } else {
-            word.setValue("", forKey: "keyword")
+            // save image.
+            self.saveImage()
+            //1
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext!
+            
+            //2
+            let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: managedContext)
+            let word = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
+            //3
+            //if (keyWordTextFiled.text != nil) {
+                word.setValue(keyWordTextFiled.text, forKey: "keyword")
+            //} else {
+               // word.setValue(" ", forKey: "keyword")
+           // }
+           // if (currentFileNameImage != nil) {
+                word.setValue(currentFileNameImage, forKey: "image")
+           // } else {
+                //word.setValue(" ", forKey: "image")
+           // }
+            //if (currentFileNameRecord != nil) {
+                word.setValue(currentFileNameRecord, forKey: "audio")
+           // } else {
+               // word.setValue(" ", forKey: "audio")
+            //}
+            
+            
+            //word.setValue(chooseImage, forKey: "image")
+            //4
+            var error: NSError?
+            if (!managedContext.save(&error)) {
+                print("Save error\(error)")
+            }
+            
+            let root = HomeVC(nibName: "HomeVC", bundle: nil)
+            self.navigationController?.pushViewController(root, animated: false)
         }
-        if (count(currentFileNameImage) > 0) {
-            word.setValue(currentFileNameImage, forKey: "image")
-        } else {
-            word.setValue("", forKey: "image")
-        }
-        if (count(currentFileNameRecord) > 0) {
-            word.setValue(currentFileNameRecord, forKey: "audio")
-        } else {
-            word.setValue("", forKey: "audio")
-        }
-        
-        
-        //word.setValue(chooseImage, forKey: "image")
-        //4 
-        var error: NSError?
-        if (!managedContext.save(&error)) {
-            print("Save error\(error)")
-        }
-        
-        let root = HomeVC(nibName: "HomeVC", bundle: nil)
-        self.navigationController?.pushViewController(root, animated: false)
+       
     }
     
     @IBAction func touchBack(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(false)
+        if(recordButton.selected == true) {
+            let alert = UIAlertView(title: "Oop", message: "Turn off record.", delegate: self, cancelButtonTitle: "OK")
+            alert.delegate = self
+            alert.show()
+        } else {
+            self.navigationController?.popViewControllerAnimated(false)
+        }
+        
     }
     // Keyborad notification.
     func registerForKeyboardNotifications() {
@@ -207,6 +226,14 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     //MARK: - Textfield delegate.
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            var frame = self.detailView.frame;
+            frame.origin.y -= 216
+            self.detailView.frame = frame
+        })
+        return true
+    }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         detailView.layoutIfNeeded()
@@ -216,6 +243,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         detailView.setTranslatesAutoresizingMaskIntoConstraints(false)
         return true
     }
+    
     
     //MARK: - ActionSheet Delegate
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
@@ -247,7 +275,20 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        switch(caseAlertSelected) {
+            case 1:
+                self.keyWordTextFiled.becomeFirstResponder()
+                break
+            case 2:
+                self.touchChooseImage(viewImageButton)
+                break
+            case 3:
+            break
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - UIImgaePickerController
@@ -256,8 +297,8 @@ extension AddNewVC {
         if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
             chooseImage = pickerImage
             viewImageItemImage.image = chooseImage
-            viewImageButton.hidden = true
-            self.saveImage()
+            viewImageButton.setImage(nil, forState: UIControlState.Normal)
+            isChoosenImage = true
         }
         dismissViewControllerAnimated(true, completion: nil)
     }

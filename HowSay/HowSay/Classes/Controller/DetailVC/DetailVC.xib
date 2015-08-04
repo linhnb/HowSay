@@ -112,14 +112,15 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="asw-p1-j5g" userLabel="Repeat">
-                    <rect key="frame" x="514" y="272" width="44" height="44"/>
+                    <rect key="frame" x="514" y="273" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="0f3-px-1wf"/>
                         <constraint firstAttribute="width" constant="44" id="oFG-fU-4Rc"/>
                     </constraints>
-                    <state key="normal" image="ic_repeat">
+                    <state key="normal" image="icon_non_repeat">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="selected" image="ic_repeat"/>
                     <connections>
                         <action selector="repeatTouch:" destination="-1" eventType="touchUpInside" id="xJH-K9-Bob"/>
                     </connections>
@@ -149,12 +150,12 @@
                 <constraint firstItem="wkk-7N-OSx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rhj-Nq-K06"/>
                 <constraint firstItem="KWc-gg-hjr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sgt-Od-Db8"/>
                 <constraint firstAttribute="trailing" secondItem="wkk-7N-OSx" secondAttribute="trailing" id="syN-2R-dhy"/>
-                <constraint firstAttribute="bottom" secondItem="asw-p1-j5g" secondAttribute="bottom" constant="4" id="uSn-Af-pbH"/>
+                <constraint firstAttribute="bottom" secondItem="asw-p1-j5g" secondAttribute="bottom" constant="3" id="uSn-Af-pbH"/>
                 <constraint firstAttribute="trailing" secondItem="zML-oh-qGy" secondAttribute="trailing" id="y6m-WJ-Npv"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="444" y="332"/>
+            <point key="canvasLocation" x="184" y="317"/>
         </view>
     </objects>
     <resources>
@@ -166,5 +167,6 @@
         <image name="ic_play" width="31" height="32"/>
         <image name="ic_previously" width="33" height="34"/>
         <image name="ic_repeat" width="31" height="34"/>
+        <image name="icon_non_repeat" width="32" height="34"/>
     </resources>
 </document>
