@@ -2,10 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC_ipad" customModule="HowSay" customModuleProvider="target">
             <connections>
+                <outlet property="deleteButton" destination="HE3-jR-cYP" id="a66-hk-pVs"/>
                 <outlet property="homeCollectionView" destination="dCu-1B-dgG" id="GzJ-Tq-255"/>
                 <outlet property="playButton" destination="4dz-ih-hoU" id="Nnu-PB-fhc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -20,23 +22,23 @@
                     <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ge-s6-2bu">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="84"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="114"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="vBY-BC-DdI">
-                            <rect key="frame" x="0.0" y="0.0" width="768" height="84"/>
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="114"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="vBY-BC-DdI" firstAttribute="top" secondItem="8Ge-s6-2bu" secondAttribute="top" id="FhY-iQ-tZN"/>
-                        <constraint firstAttribute="height" constant="84" id="PZ2-oP-Rhn"/>
-                        <constraint firstAttribute="trailing" secondItem="vBY-BC-DdI" secondAttribute="trailing" id="mP6-P4-coy"/>
-                        <constraint firstItem="vBY-BC-DdI" firstAttribute="leading" secondItem="8Ge-s6-2bu" secondAttribute="leading" id="mYS-hm-Fsy"/>
-                        <constraint firstAttribute="bottom" secondItem="vBY-BC-DdI" secondAttribute="bottom" id="v7V-UD-PBR"/>
+                        <constraint firstAttribute="width" secondItem="8Ge-s6-2bu" secondAttribute="height" multiplier="128:19" id="3zU-e3-Jfb"/>
+                        <constraint firstItem="vBY-BC-DdI" firstAttribute="leading" secondItem="8Ge-s6-2bu" secondAttribute="leading" id="8J3-Rk-ZpC"/>
+                        <constraint firstAttribute="trailing" secondItem="vBY-BC-DdI" secondAttribute="trailing" id="AOT-Zl-T98"/>
+                        <constraint firstAttribute="bottom" secondItem="vBY-BC-DdI" secondAttribute="bottom" id="DVP-or-IBE"/>
+                        <constraint firstItem="vBY-BC-DdI" firstAttribute="top" secondItem="8Ge-s6-2bu" secondAttribute="top" id="tFz-el-037"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="dCu-1B-dgG">
-                    <rect key="frame" x="0.0" y="84" width="768" height="940"/>
+                    <rect key="frame" x="0.0" y="114" width="768" height="910"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="N8g-Lx-abL">
                         <size key="itemSize" width="92" height="92"/>
@@ -49,25 +51,40 @@
                         <outlet property="delegate" destination="-1" id="Z5W-4y-eSR"/>
                     </connections>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-ih-hoU">
-                    <rect key="frame" x="707" y="977" width="46" height="30"/>
-                    <state key="normal" title="Button">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE3-jR-cYP">
+                    <rect key="frame" x="8" y="977" width="60" height="30"/>
+                    <state key="normal" title="Delete">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-ih-hoU">
+                    <rect key="frame" x="729" y="975" width="31" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="31" id="8YF-Vb-bYg"/>
+                        <constraint firstAttribute="height" constant="32" id="8ct-dg-1xW"/>
+                    </constraints>
+                    <state key="normal" image="ic_play">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="touchPlay:" destination="-1" eventType="touchUpInside" id="uhE-Qp-0A0"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="8Ge-s6-2bu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3Xn-YU-rxo"/>
-                <constraint firstItem="8Ge-s6-2bu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Se-Bz-NkA"/>
-                <constraint firstAttribute="trailing" secondItem="8Ge-s6-2bu" secondAttribute="trailing" id="Jfj-PY-qfS"/>
+                <constraint firstItem="8Ge-s6-2bu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qv3-ds-vWx"/>
+                <constraint firstItem="8Ge-s6-2bu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YTS-75-sBV"/>
                 <constraint firstItem="dCu-1B-dgG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bnu-ff-gEe"/>
                 <constraint firstAttribute="trailing" secondItem="sJO-Cq-eEY" secondAttribute="trailing" id="eEF-Sz-9HD"/>
                 <constraint firstAttribute="trailing" secondItem="dCu-1B-dgG" secondAttribute="trailing" id="hMs-Kf-jdK"/>
                 <constraint firstItem="sJO-Cq-eEY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ifV-lG-aeM"/>
+                <constraint firstAttribute="trailing" secondItem="8Ge-s6-2bu" secondAttribute="trailing" id="ixX-yq-xaN"/>
+                <constraint firstItem="dCu-1B-dgG" firstAttribute="top" secondItem="8Ge-s6-2bu" secondAttribute="bottom" id="kVZ-Cx-ic7"/>
                 <constraint firstAttribute="bottom" secondItem="dCu-1B-dgG" secondAttribute="bottom" id="mUm-WK-zHh"/>
-                <constraint firstItem="dCu-1B-dgG" firstAttribute="top" secondItem="8Ge-s6-2bu" secondAttribute="bottom" id="wUx-jv-0h7"/>
+                <constraint firstAttribute="trailing" secondItem="4dz-ih-hoU" secondAttribute="trailing" constant="8" id="tT3-15-9US"/>
                 <constraint firstAttribute="bottom" secondItem="sJO-Cq-eEY" secondAttribute="bottom" id="wbo-5k-6wU"/>
+                <constraint firstAttribute="bottom" secondItem="4dz-ih-hoU" secondAttribute="bottom" constant="17" id="wjT-pS-Dz8"/>
                 <constraint firstItem="sJO-Cq-eEY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y6m-i6-urW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
@@ -76,5 +93,6 @@
     <resources>
         <image name="background_green" width="568" height="257"/>
         <image name="background_top" width="568" height="84"/>
+        <image name="ic_play" width="31" height="32"/>
     </resources>
 </document>

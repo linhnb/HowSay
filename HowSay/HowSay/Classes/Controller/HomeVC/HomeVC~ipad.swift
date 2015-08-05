@@ -12,6 +12,7 @@ class HomeVC_ipad: UIViewController {
 
     @IBOutlet weak var homeCollectionView: UICollectionView!
     
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
     var identifier1 = "cell1"
     var identifier2 = "cell2"
@@ -32,8 +33,12 @@ class HomeVC_ipad: UIViewController {
         homeCollectionView.registerNib(nibNameNormal, forCellWithReuseIdentifier: identifier1)
         let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
         homeCollectionView.registerNib(nibNameAdd, forCellWithReuseIdentifier: identifier2)
-        
+
+    }
+    
+    // MARK:- Button Action.
+    
+    @IBAction func touchPlay(sender: AnyObject) {
         
     }
-
 }
