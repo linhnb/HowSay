@@ -10,23 +10,29 @@ import UIKit
 import CoreData
 
 
+
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
     
+    var words = [WordObject]()
+    var wordManagedObjects = [NSManagedObject]()
     var coverView: UIView = UIView()
     var mainScreen: CGRect = CGRect()
+    
     var addView = AddView()
+    var playDetailView = PlayDetailView()
     var actionSheet = UIActionSheet()
      var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
     var listSelecteds = [WordObject]()
     var numberOfCell = 0
+    
+    
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
-    var words = [WordObject]()
-    var wordManagedObjects = [NSManagedObject]()
+   
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
     override func viewDidLoad() {
@@ -36,6 +42,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func loadViewBegin() {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "deviceRotation", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
+        
         let nibNameNormal  = UINib(nibName: "HomeCell", bundle: nil)
         homeCollectionView.registerNib(nibNameNormal, forCellWithReuseIdentifier: identifier1)
         let nibNameAdd = UINib(nibName: "AddNewCell", bundle: nil)
@@ -50,12 +60,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewWillAppear(animated)
         self.loadData()
     }
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
+    
     func loadData() {
         //1
         let appDelegate =
@@ -148,11 +157,35 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.removeWordFromCoreData(wordDeletes: listSelecteds)
     }
     @IBAction func touchPlay(sender: AnyObject) {
-        let detail = DetailVC(nibName: "DetailVC", bundle: nil)
-        detail.listSelecteds = listSelecteds
-        self.navigationController?.pushViewController(detail, animated: true)
+        
+        if ( UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad ){
+           self.addPlayDetailViewToView()
+        } else {
+            let detail = DetailVC(nibName: "DetailVC", bundle: nil)
+            detail.listSelecteds = listSelecteds
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
     }
     
+    func addPlayDetailViewToView() {
+        playDetailView = NSBundle.mainBundle().loadNibNamed("PlayDetailView", owner: self, options: nil)[0] as! PlayDetailView
+        playDetailView.listObjs = listSelecteds
+        //playDetailView.delegate = self
+        coverView = UIView(frame: CGRectMake(-1000 , -1000, 2500 , 2500 ))
+        //coverView = UIView(frame: mainScreen)
+        
+        coverView.backgroundColor = UIColor.whiteColor()
+        coverView.alpha = 0.7
+        self.addTapGestureTo(view: coverView)
+        self.addTapGestureTo(view: self.view)
+        
+        
+        self.view.addSubview(coverView)
+        coverView.center = self.view.center
+        
+        self.view.addSubview(playDetailView)
+        playDetailView.center = self.view.center
+    }
     func removeWordFromCoreData(#wordDeletes: [WordObject]) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext:NSManagedObjectContext = appDelegate.managedObjectContext!
@@ -198,8 +231,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         addView = NSBundle.mainBundle().loadNibNamed("AddView", owner: self, options: nil)[0] as! AddView
         addView.delegate = self
 
-        //coverView = UIView(frame: CGRectMake(addView.frame.origin.x - 20, addView.frame.origin.y - 20, addView.frame.size.width + 40 , addView.frame.size.height + 40 ))
-        coverView = UIView(frame: mainScreen)
+        coverView = UIView(frame: CGRectMake(-1000 , -1000, 2500 , 2500 ))
+        //coverView = UIView(frame: mainScreen)
             
         coverView.backgroundColor = UIColor.whiteColor()
         coverView.alpha = 0.7
@@ -216,12 +249,15 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     
-    
     //MARK: - dismisCoverView
     func dismisCoverView (){
+        
         addView.hidden = true
+        playDetailView.hidden = true
         coverView.hidden = true
         
+        listSelecteds.removeAll(keepCapacity: false)
+        homeCollectionView.reloadData()
     }
     
     func addTapGestureTo(#view: UIView) {
@@ -234,7 +270,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     //MARK: - AddviewDelegate
     
     func addViewDelegateDismissAddView() {
-         self.dismisCoverView()
+        // self.dismisCoverView()
     }
     
     func addViewDelegatePresentView(#imagePicker: UIImagePickerController) {
@@ -252,7 +288,39 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         imagePicker!.delegate = self
         actionSheet.showInView(self.view)
     }
-
+    
+    func addViewDelegateRecord(#isSelected: Bool) {
+    }
+    
+    func addViewDelegateDidFinishSave() {
+        self.loadData()
+        homeCollectionView.reloadData()
+    }
+    
+    
+    //MARK: - Device Rotation
+//    override func supportedInterfaceOrientations() -> Int {
+//        return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+//    }
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
+    
+    func deviceRotation() {
+        mainScreen = UIScreen.mainScreen().bounds
+        
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
+            //addView.layoutIfNeeded()
+            let frame = CGRectMake(mainScreen.size.width/2 - addView.frame.size.width/2, mainScreen.size.height/2 - addView.frame.size.height/2, addView.frame.size.width, addView.frame.size.height)
+            addView.frame = frame
+        }
+        
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            //addView.layoutIfNeeded()
+            let frame = CGRectMake(mainScreen.size.width/2 - addView.frame.size.height/2, mainScreen.size.height/2 - addView.frame.size.width/2, addView.frame.size.width, addView.frame.size.height)
+            addView.frame = frame
+        }
+    }
 }
 
 //MARK: - UICollectionViewDelegate
@@ -299,6 +367,7 @@ extension HomeVC {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView .cellForItemAtIndexPath(indexPath) as! HomeCell
+        
         
         if (contains(listSelecteds, cell.word!)) {
             var i = 0
@@ -365,8 +434,11 @@ extension HomeVC {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         if let pickerImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
             chooseImage = pickerImage
-            //iconImage.image = chooseImage
-            //chooseImageButton.hidden = true
+            addView.imageViewImage.image = chooseImage
+            addView.chooseImageButton.setImage(nil, forState: UIControlState.Normal)
+            var dict: [String: UIImage] = [:]
+            dict.updateValue(chooseImage, forKey: "image")
+            NSNotificationCenter.defaultCenter().postNotificationName("HomeVCDidChooseImage", object: nil, userInfo: dict)
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -378,15 +450,16 @@ extension HomeVC {
 
 }
 
-
-extension UINavigationController {
-    public override func supportedInterfaceOrientations() -> Int {
-        return visibleViewController.supportedInterfaceOrientations()
-    }
-    public override func shouldAutorotate() -> Bool {
-        return visibleViewController.shouldAutorotate()
-    }
-}
+//MARK:- UItabarContrller, UINavigationController.
+//
+//extension UINavigationController {
+//    public override func supportedInterfaceOrientations() -> Int {
+//        return visibleViewController.supportedInterfaceOrientations()
+//    }
+//    public override func shouldAutorotate() -> Bool {
+//        return visibleViewController.shouldAutorotate()
+//    }
+//}
 
 extension UITabBarController {
     public override func supportedInterfaceOrientations() -> Int {

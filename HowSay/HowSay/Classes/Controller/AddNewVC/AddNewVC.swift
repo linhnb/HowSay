@@ -78,7 +78,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
-        currentFileNameRecord = formatter.stringFromDate(currentDateTime)+".wav"
+        currentFileNameRecord = "recording-" + formatter.stringFromDate(currentDateTime)+".wav"
         let pathArray = [dirPath, currentFileNameRecord]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
         println(filePath)

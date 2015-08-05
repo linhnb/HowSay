@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlayDetailView" customModule="HowSay" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="639" height="360"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_green" translatesAutoresizingMaskIntoConstraints="NO" id="UVA-rV-4RZ">
+                    <rect key="frame" x="0.0" y="0.0" width="639" height="360"/>
+                </imageView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t7q-Yz-dMa" userLabel="View Top">
+                    <rect key="frame" x="0.0" y="0.0" width="639" height="95"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="n3r-iO-S58">
+                            <rect key="frame" x="0.0" y="0.0" width="639" height="95"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L8k-jj-snk" userLabel="View Content">
+                    <rect key="frame" x="0.0" y="95" width="639" height="266"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YB0-NW-MQS">
+                            <rect key="frame" x="0.0" y="0.0" width="639" height="266"/>
+                            <connections>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="HjR-eh-eZi"/>
+                            </connections>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iap-UV-8cw" userLabel="Repeat">
+                    <rect key="frame" x="587" y="309" width="44" height="44"/>
+                    <state key="normal" image="icon_non_repeat">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ic_repeat"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phO-av-Lk7" userLabel="Pre">
+                    <rect key="frame" x="8" y="195" width="44" height="44"/>
+                    <state key="normal" image="ic_previously">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pt8-So-n5e" userLabel="Back">
+                    <rect key="frame" x="8" y="309" width="44" height="44"/>
+                    <state key="normal" image="ic_back">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tcf-IV-Tge" userLabel="Play">
+                    <rect key="frame" x="297" y="308" width="44" height="44"/>
+                    <state key="normal" image="ic_play">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" image="ic_pause"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJJ-Js-riL" userLabel="Next">
+                    <rect key="frame" x="595" y="195" width="44" height="44"/>
+                    <state key="normal" image="ic_next">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backButton" destination="Pt8-So-n5e" id="L95-PT-M3Y"/>
+                <outlet property="nextButton" destination="HJJ-Js-riL" id="7Qr-Bv-7RB"/>
+                <outlet property="playButton" destination="Tcf-IV-Tge" id="BeY-NZ-s1a"/>
+                <outlet property="preButton" destination="phO-av-Lk7" id="8hd-dN-DW2"/>
+                <outlet property="repeatButton" destination="iap-UV-8cw" id="ylz-ti-Vcr"/>
+                <outlet property="scrollContent" destination="YB0-NW-MQS" id="Qoo-zk-5d8"/>
+                <outlet property="viewContent" destination="L8k-jj-snk" id="HJ2-RU-xrH"/>
+            </connections>
+            <point key="canvasLocation" x="447.5" y="191"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background_green" width="568" height="257"/>
+        <image name="background_top" width="568" height="84"/>
+        <image name="ic_back" width="34" height="34"/>
+        <image name="ic_next" width="33" height="34"/>
+        <image name="ic_pause" width="34" height="34"/>
+        <image name="ic_play" width="31" height="32"/>
+        <image name="ic_previously" width="33" height="34"/>
+        <image name="ic_repeat" width="31" height="34"/>
+        <image name="icon_non_repeat" width="32" height="34"/>
+    </resources>
+</document>
