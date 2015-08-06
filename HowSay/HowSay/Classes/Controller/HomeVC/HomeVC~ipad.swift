@@ -41,4 +41,7 @@ class HomeVC_ipad: UIViewController {
     @IBAction func touchPlay(sender: AnyObject) {
         
     }
+    
+    @IBAction func touchDelete(sender: AnyObject) {
+    }
 }

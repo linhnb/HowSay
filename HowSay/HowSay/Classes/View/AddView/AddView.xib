@@ -102,7 +102,7 @@
                 <outlet property="keyWordTextField" destination="oVj-LT-c3c" id="0UO-eR-Ojw"/>
                 <outlet property="recordButton" destination="1on-sR-UPb" id="3lb-Fw-l2x"/>
             </connections>
-            <point key="canvasLocation" x="684" y="320"/>
+            <point key="canvasLocation" x="75.5" y="344"/>
         </view>
     </objects>
     <resources>

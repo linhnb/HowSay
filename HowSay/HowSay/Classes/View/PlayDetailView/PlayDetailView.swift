@@ -11,7 +11,7 @@ import CoreData
 import AVFoundation
 
 protocol PlayDetailViewDelegate {
-    
+    func playDetailViewDelegateEnableDismiss(#flag: Bool);
 }
 class PlayDetailView: UIView, UIScrollViewDelegate {
 
@@ -23,7 +23,7 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var viewContent: UIView!
     
-    
+    var delegate: PlayDetailViewDelegate?
     var listSelecteds = [WordObject]()
     
     var listObjs = [WordObject]() {
@@ -50,6 +50,7 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
         repeatButton.selected = false
         print(listSelecteds.count)
         print(listObjs.count)
+        backButton.hidden = true
     }
     
     func setupScroll() {
@@ -65,4 +66,100 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
             scrollContent.addSubview(detail)
         }
     }
+    
+    //MARK: - Action button.
+    
+    @IBAction func touchRepeat(sender: AnyObject) {
+        repeatButton.selected = !repeatButton.selected
+        if(repeatButton.selected == false) {
+            nextButton.hidden = false
+        } else {
+            nextButton.hidden = true
+            
+        }
+    }
+    
+    @IBAction func touchPreview(sender: AnyObject) {
+        print("touch Preview")
+        nextButton.hidden = false
+        
+        if position < 1 {
+            preButton.hidden = true
+            return
+        }
+        position = position - 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.scrollContent.contentOffset = CGPoint(x: self.frame.size.width * CGFloat( self.position), y: 0)
+        })
+    }
+    
+    @IBAction func touchBack(sender: AnyObject) {
+    }
+    
+    @IBAction func touchPlay(sender: AnyObject) {
+        self.delegate?.playDetailViewDelegateEnableDismiss(flag: false)
+        playButton.selected = !playButton.selected
+        
+        print("Play Audio \n")
+        let audioString = listAudio[position]
+        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
+        let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
+        if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
+            if paths.count > 0 {
+                if let dirPath = paths[0] as? String {
+                    let readPath = dirPath.stringByAppendingPathComponent(audioString)
+                    let audioURL = NSURL(fileURLWithPath: readPath)
+                    player = AVPlayer(URL: audioURL)
+                    player.play()
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidFinishPlaying", name: AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+                    
+                }
+            }
+        }
+    }
+
+    @IBAction func touchNext(sender: AnyObject) {
+        print("touch Next")
+        preButton.hidden = false
+        if position > 1 {
+            nextButton.hidden = true
+            return
+        }
+        position = position + 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.scrollContent.contentOffset = CGPoint(x: self.frame.size.width * CGFloat( self.position), y: 0)
+        })
+    }
+    
+    func playerDidFinishPlaying() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        playButton.selected = false
+        if(repeatButton.selected == true) {
+            NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "delay", userInfo: nil, repeats: false)
+            self.delegate?.playDetailViewDelegateEnableDismiss(flag: false)
+        } else {
+            self.delegate?.playDetailViewDelegateEnableDismiss(flag: true)
+        }
+    }
+    func delay() {
+        self.touchPlay(playButton)
+        //nothing in my method
+    }
+    
+    //MARK:- UIScroll
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        position = Int (scrollView.contentOffset.x / viewContent.frame.size.width)
+        
+        if (position == 0) {
+            preButton.hidden = true
+        }
+        if (position == listSelecteds.count - 1) {
+            nextButton.hidden = true
+        }
+        if (position >= 1 && position <= listSelecteds.count - 2) {
+            preButton.hidden = false
+            nextButton.hidden = false
+        }
+    }
+
 }

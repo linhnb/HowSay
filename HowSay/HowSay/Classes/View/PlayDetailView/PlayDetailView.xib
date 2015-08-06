@@ -40,18 +40,27 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="ic_repeat"/>
+                    <connections>
+                        <action selector="touchRepeat:" destination="iN0-l3-epB" eventType="touchUpInside" id="MK2-1d-7AE"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phO-av-Lk7" userLabel="Pre">
                     <rect key="frame" x="8" y="195" width="44" height="44"/>
                     <state key="normal" image="ic_previously">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="touchPreview:" destination="iN0-l3-epB" eventType="touchUpInside" id="tzo-Ab-VVZ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pt8-So-n5e" userLabel="Back">
                     <rect key="frame" x="8" y="309" width="44" height="44"/>
                     <state key="normal" image="ic_back">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="touchBack:" destination="iN0-l3-epB" eventType="touchUpInside" id="02m-Mg-QKh"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tcf-IV-Tge" userLabel="Play">
                     <rect key="frame" x="297" y="308" width="44" height="44"/>
@@ -59,12 +68,18 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <state key="selected" image="ic_pause"/>
+                    <connections>
+                        <action selector="touchPlay:" destination="iN0-l3-epB" eventType="touchUpInside" id="W8n-5Q-EYy"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJJ-Js-riL" userLabel="Next">
                     <rect key="frame" x="595" y="195" width="44" height="44"/>
                     <state key="normal" image="ic_next">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="touchNext:" destination="iN0-l3-epB" eventType="touchUpInside" id="22g-4J-LMC"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -79,7 +94,7 @@
                 <outlet property="scrollContent" destination="YB0-NW-MQS" id="Qoo-zk-5d8"/>
                 <outlet property="viewContent" destination="L8k-jj-snk" id="HJ2-RU-xrH"/>
             </connections>
-            <point key="canvasLocation" x="447.5" y="191"/>
+            <point key="canvasLocation" x="600.5" y="184"/>
         </view>
     </objects>
     <resources>

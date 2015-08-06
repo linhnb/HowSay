@@ -51,17 +51,12 @@
                         <outlet property="delegate" destination="-1" id="Z5W-4y-eSR"/>
                     </connections>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE3-jR-cYP">
-                    <rect key="frame" x="8" y="977" width="60" height="30"/>
-                    <state key="normal" title="Delete">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-ih-hoU">
                     <rect key="frame" x="729" y="975" width="31" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="31" id="8YF-Vb-bYg"/>
                         <constraint firstAttribute="height" constant="32" id="8ct-dg-1xW"/>
+                        <constraint firstAttribute="width" secondItem="4dz-ih-hoU" secondAttribute="height" multiplier="31:32" id="Q2n-zd-MyE"/>
                     </constraints>
                     <state key="normal" image="ic_play">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,11 +65,26 @@
                         <action selector="touchPlay:" destination="-1" eventType="touchUpInside" id="uhE-Qp-0A0"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE3-jR-cYP">
+                    <rect key="frame" x="8" y="976" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Tk1-AT-pbc"/>
+                        <constraint firstAttribute="width" secondItem="HE3-jR-cYP" secondAttribute="height" multiplier="1:1" id="qE7-hH-SGJ"/>
+                        <constraint firstAttribute="width" constant="30" id="rNj-d0-uxO"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="icon_delete">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="touchDelete:" destination="-1" eventType="touchUpInside" id="8Ya-MH-95z"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="8Ge-s6-2bu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qv3-ds-vWx"/>
                 <constraint firstItem="8Ge-s6-2bu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YTS-75-sBV"/>
+                <constraint firstAttribute="bottom" secondItem="HE3-jR-cYP" secondAttribute="bottom" constant="18" id="apy-vR-FBq"/>
                 <constraint firstItem="dCu-1B-dgG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bnu-ff-gEe"/>
                 <constraint firstAttribute="trailing" secondItem="sJO-Cq-eEY" secondAttribute="trailing" id="eEF-Sz-9HD"/>
                 <constraint firstAttribute="trailing" secondItem="dCu-1B-dgG" secondAttribute="trailing" id="hMs-Kf-jdK"/>
@@ -82,17 +92,20 @@
                 <constraint firstAttribute="trailing" secondItem="8Ge-s6-2bu" secondAttribute="trailing" id="ixX-yq-xaN"/>
                 <constraint firstItem="dCu-1B-dgG" firstAttribute="top" secondItem="8Ge-s6-2bu" secondAttribute="bottom" id="kVZ-Cx-ic7"/>
                 <constraint firstAttribute="bottom" secondItem="dCu-1B-dgG" secondAttribute="bottom" id="mUm-WK-zHh"/>
+                <constraint firstItem="HE3-jR-cYP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="oBM-Yd-8ek"/>
                 <constraint firstAttribute="trailing" secondItem="4dz-ih-hoU" secondAttribute="trailing" constant="8" id="tT3-15-9US"/>
                 <constraint firstAttribute="bottom" secondItem="sJO-Cq-eEY" secondAttribute="bottom" id="wbo-5k-6wU"/>
                 <constraint firstAttribute="bottom" secondItem="4dz-ih-hoU" secondAttribute="bottom" constant="17" id="wjT-pS-Dz8"/>
                 <constraint firstItem="sJO-Cq-eEY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y6m-i6-urW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+            <point key="canvasLocation" x="381" y="325"/>
         </view>
     </objects>
     <resources>
         <image name="background_green" width="568" height="257"/>
         <image name="background_top" width="568" height="84"/>
         <image name="ic_play" width="31" height="32"/>
+        <image name="icon_delete" width="30" height="30"/>
     </resources>
 </document>
