@@ -107,10 +107,10 @@ class AddView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDe
             var error: NSError?
             if (!managedContext.save(&error)) {
                 print("Save error\(error)")
-                ShowStatus().showStatus(status: "error", cancelButton: "", inTime: 0.5)
+                ShowStatus().showStatus(status: "error", cancelButton: "", inTime: 0.7)
             } else {
                 
-               ShowStatus().showStatus(status: "success", cancelButton: "", inTime: 0.5)
+               ShowStatus().showStatus(status: "success", cancelButton: "", inTime: 0.7)
             }
             self.dismissKeyBoard()
             self.delegate?.addViewDelegateDismissAddView()

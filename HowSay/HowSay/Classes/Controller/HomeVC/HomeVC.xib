@@ -69,13 +69,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HE7-bI-vT3">
-                    <rect key="frame" x="8" y="282" width="60" height="30"/>
+                    <rect key="frame" x="8" y="282" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="8A1-ka-ncd"/>
-                        <constraint firstAttribute="width" constant="60" id="LIh-GW-STK"/>
+                        <constraint firstAttribute="width" constant="30" id="LIh-GW-STK"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="Delete">
+                    <state key="normal" backgroundImage="icon_delete">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -110,5 +110,6 @@
         <image name="background_green" width="568" height="257"/>
         <image name="background_top" width="568" height="84"/>
         <image name="ic_play" width="31" height="32"/>
+        <image name="icon_delete" width="30" height="30"/>
     </resources>
 </document>

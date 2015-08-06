@@ -11,7 +11,7 @@ import CoreData
 
 
 
-class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, AddNewCellDelegate, UICollectionViewDelegateFlowLayout, AddViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, PlayDetailViewDelegate {
     var identifier1 = "cell1"
     var identifier2 = "cell2"
     
@@ -23,11 +23,15 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var addView = AddView()
     var playDetailView = PlayDetailView()
     var actionSheet = UIActionSheet()
-     var chooseImage = UIImage()
+    var chooseImage = UIImage()
     let imagePicker:UIImagePickerController? = UIImagePickerController()
     var listSelecteds = [WordObject]()
     var numberOfCell = 0
+    var isEnableDismissCoverView: Bool = true
     
+    var isAddView: Bool = true
+    var playViewHeight: CGFloat = 0
+    var playViewWidth:CGFloat = 0
     
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
@@ -53,7 +57,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         mainScreen = UIScreen.mainScreen().bounds
         playButton.hidden = true
         deleteButton.hidden = true
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -169,6 +172,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func addPlayDetailViewToView() {
         playDetailView = NSBundle.mainBundle().loadNibNamed("PlayDetailView", owner: self, options: nil)[0] as! PlayDetailView
+        playDetailView.delegate = self
         playDetailView.listObjs = listSelecteds
         //playDetailView.delegate = self
         coverView = UIView(frame: CGRectMake(-1000 , -1000, 2500 , 2500 ))
@@ -176,8 +180,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         coverView.backgroundColor = UIColor.whiteColor()
         coverView.alpha = 0.7
+        
         self.addTapGestureTo(view: coverView)
-        self.addTapGestureTo(view: self.view)
+        //self.addTapGestureTo(view: self.view)
         
         
         self.view.addSubview(coverView)
@@ -185,6 +190,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         self.view.addSubview(playDetailView)
         playDetailView.center = self.view.center
+        playViewHeight = playDetailView.bounds.size.height
+        playViewWidth = playDetailView.bounds.size.width
+        isAddView = false
     }
     func removeWordFromCoreData(#wordDeletes: [WordObject]) {
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -237,7 +245,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         coverView.backgroundColor = UIColor.whiteColor()
         coverView.alpha = 0.7
         self.addTapGestureTo(view: coverView)
-        self.addTapGestureTo(view: self.view)
+        //self.addTapGestureTo(view: self.view)
         
         
         self.view.addSubview(coverView)
@@ -245,19 +253,35 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         self.view.addSubview(addView)
         addView.center = self.view.center
-
+        
+        playViewHeight = addView.bounds.size.height
+        playViewWidth = addView.bounds.size.width
+        isAddView = true
     }
     
     
     //MARK: - dismisCoverView
     func dismisCoverView (){
+        if(UIDevice.currentDevice().userInterfaceIdiom == UIUserInterfaceIdiom.Pad){
+            if(isEnableDismissCoverView == true){
+                addView.hidden = true
+                playDetailView.hidden = true
+                coverView.hidden = true
+                
+                listSelecteds.removeAll(keepCapacity: false)
+                homeCollectionView.reloadData()
+                playButton.hidden = true
+                deleteButton.hidden = true
+            }
+        } else {
+            addView.hidden = true
+            playDetailView.hidden = true
+            coverView.hidden = true
+            
+            listSelecteds.removeAll(keepCapacity: false)
+            homeCollectionView.reloadData()
+        }
         
-        addView.hidden = true
-        playDetailView.hidden = true
-        coverView.hidden = true
-        
-        listSelecteds.removeAll(keepCapacity: false)
-        homeCollectionView.reloadData()
     }
     
     func addTapGestureTo(#view: UIView) {
@@ -270,7 +294,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     //MARK: - AddviewDelegate
     
     func addViewDelegateDismissAddView() {
-        // self.dismisCoverView()
+        self.dismisCoverView()
+        self.loadData()
+        homeCollectionView.reloadData()
     }
     
     func addViewDelegatePresentView(#imagePicker: UIImagePickerController) {
@@ -293,10 +319,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func addViewDelegateDidFinishSave() {
+        self.dismisCoverView()
         self.loadData()
         homeCollectionView.reloadData()
     }
     
+    
+    //MARK: - PlayDetailViewDelegate
+    func playDetailViewDelegateEnableDismiss(#flag: Bool) {
+        isEnableDismissCoverView = flag
+    }
     
     //MARK: - Device Rotation
 //    override func supportedInterfaceOrientations() -> Int {
@@ -307,18 +339,16 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 //    }
     
     func deviceRotation() {
+        playDetailView.layoutIfNeeded()
         mainScreen = UIScreen.mainScreen().bounds
         
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)) {
-            //addView.layoutIfNeeded()
-            let frame = CGRectMake(mainScreen.size.width/2 - addView.frame.size.width/2, mainScreen.size.height/2 - addView.frame.size.height/2, addView.frame.size.width, addView.frame.size.height)
-            addView.frame = frame
-        }
+        let frame = CGRectMake(mainScreen.size.width/2 - playViewWidth/2, mainScreen.size.height/2 - playViewHeight/2, addView.frame.size.width, addView.frame.size.height)
+        playDetailView.frame = frame
         
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
-            //addView.layoutIfNeeded()
-            let frame = CGRectMake(mainScreen.size.width/2 - addView.frame.size.height/2, mainScreen.size.height/2 - addView.frame.size.width/2, addView.frame.size.width, addView.frame.size.height)
+        if(isAddView == true ) {
             addView.frame = frame
+        } else {
+            playDetailView.frame = frame
         }
     }
 }
