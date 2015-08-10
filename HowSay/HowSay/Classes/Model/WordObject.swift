@@ -12,4 +12,5 @@ class WordObject: NSObject {
     var keyword = String()//[NSManagedObject]()
     var image = String()//[NSManagedObject]()
     var audio = String()//[NSManagedObject]()
+    //var isDelete = Bool()
 }

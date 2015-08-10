@@ -119,8 +119,11 @@ import AVFoundation
         print("next touch")
         preButton.hidden = false
         if position > 1 {
-            nextButton.hidden = true
-            return
+            nextButton.hidden = false
+            //return
+        }
+        if position == listSelecteds.count - 1 {
+            nextButton.hidden = false
         }
         position = position + 1
         UIView.animateWithDuration(0.5, animations: { () -> Void in
@@ -131,8 +134,10 @@ import AVFoundation
         repeatButton.selected = !repeatButton.selected
         if(repeatButton.selected == false) {
             nextButton.hidden = false
+            preButton.hidden = false
         } else {
             nextButton.hidden = true
+            preButton.hidden = true
             
         }
     }
@@ -148,9 +153,17 @@ import AVFoundation
         
         if (position == 0) {
             preButton.hidden = true
+            nextButton.hidden = true
+            if( listSelecteds.count > 1 ){
+                nextButton.hidden = false
+            }
         }
         if (position == listSelecteds.count - 1) {
             nextButton.hidden = true
+            preButton.hidden = true
+            if( listSelecteds.count > 1 ){
+                preButton.hidden = false
+            }
         }
         if (position >= 1 && position <= listSelecteds.count - 2) {
             preButton.hidden = false

@@ -15,7 +15,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var identifier1 = "cell1"
     var identifier2 = "cell2"
     
+    var wordsBasic = [WordObject]()
     var words = [WordObject]()
+    var wordsTemp = [WordObject]()
     var wordManagedObjects = [NSManagedObject]()
     var coverView: UIView = UIView()
     var mainScreen: CGRect = CGRect()
@@ -61,6 +63,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.loadBasicDataToCoreData()
         self.loadData()
     }
     
@@ -68,6 +71,62 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    func saveImage(#image: String) {
+        let resource = NSBundle.mainBundle().URLForResource(image, withExtension: nil)
+        let destination = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last?.URLByAppendingPathComponent(image)
+        NSFileManager.defaultManager().copyItemAtURL(resource!, toURL: destination!, error: nil)
+    }
+    func saveAudio(#audio: String) {
+
+        let resource = NSBundle.mainBundle().URLForResource(audio, withExtension: nil)
+        let destination = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last?.URLByAppendingPathComponent(audio)
+        NSFileManager.defaultManager().copyItemAtURL(resource!, toURL: destination!, error: nil)
+        
+    }
+    func saveBasicData(#word: WordObject) {
+        self.saveImage(image: word.image)
+        self.saveAudio(audio: word.audio)
+        
+        //1
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext!
+        
+        //2
+        let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: managedContext)
+        let wordSave = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        //3
+        wordSave.setValue(word.keyword, forKey: "keyword")
+        wordSave.setValue(word.image, forKey: "image")
+        wordSave.setValue(word.audio, forKey: "audio")
+        //4
+        var error: NSError?
+        if (!managedContext.save(&error)) {
+            print("Save error\(error)")
+        } else {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isFirstUseApp")
+        }
+    }
+    func loadBasicDataToCoreData(){
+        if (NSUserDefaults.standardUserDefaults().boolForKey("isFirstUseApp") == false){
+            let path = NSBundle.mainBundle().pathForResource("BaseCoreData", ofType: "plist")
+            let datas: NSArray = NSArray(contentsOfFile: path!)!
+            let keyWords: NSDictionary = datas[0] as! NSDictionary
+            let images: NSDictionary = datas[1] as! NSDictionary
+            let audios: NSDictionary = datas[2] as! NSDictionary
+            let keys = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+            for key in keys {
+                let word = WordObject()
+                word.keyword =  keyWords[key] as! String
+                word.image = images[key] as! String
+                word.audio = audios[key] as! String
+               //word.isDelete = true
+                self.saveBasicData(word: word)
+            }
+        } else {
+            
+        }
+    }
     func loadData() {
         //1
         let appDelegate =
@@ -94,11 +153,12 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func parseDataFromArray (arrayWord: NSArray) {
-        words.removeAll(keepCapacity: true)
+        wordsTemp.removeAll(keepCapacity: true)
         for item in arrayWord {
             var keyWord = ""
             var image = ""
             var audio = ""
+            var isDelete = true
             if (item.valueForKey("keyword") != nil) {
                 keyWord = item.valueForKey("keyword") as! String
             }
@@ -111,13 +171,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 audio = item.valueForKey("audio") as! String
             }
             
+//            if (item.valueForKey("isDelete") != nil){
+//                isDelete = item.valueForKey("iDelete") as! Bool
+//            }
+            
             //let audioData: NSData = item.valueForKey("audio") as! NSData
             
             let word = WordObject()
             word.keyword = keyWord
             word.image = image//UIImage(data: imageData)!
             word.audio = audio
-            words.append(word)
+            wordsTemp.append(word)
+        }
+        for wordElement in wordsTemp {
+            words.append(wordElement)
         }
     }
     

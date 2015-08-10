@@ -19,6 +19,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var contrainViewDetailHeight: NSLayoutConstraint!
     
     
     
@@ -55,7 +56,7 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     }
     
     override func viewDidAppear(animated: Bool) {
-        constaintDetailFrame = detailView.frame
+        
     }
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -202,45 +203,32 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     func keyboardWasShow(aNotification: NSNotification) {
         let info: NSDictionary = aNotification.userInfo!
         let kbSize: CGSize = info.objectForKey(UIKeyboardFrameBeginUserInfoKey)!.CGRectValue().size
-        
-        detailView.layoutIfNeeded()
-        detailView.setTranslatesAutoresizingMaskIntoConstraints(true)
+        self.view.layoutIfNeeded()
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            var frame = self.detailView.frame;
-            frame.origin.y -= kbSize.height
-            self.detailView.frame = frame
+            self.detailView.frame.origin.y = 0 - kbSize.height/2
         })
         
 
     }
     
     func keyboardWillBeHidden(aNotification: NSNotification) {
-        detailView.layoutIfNeeded()
-        detailView.setTranslatesAutoresizingMaskIntoConstraints(true)
+        self.view.layoutIfNeeded()
         keyWordTextFiled.resignFirstResponder()
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.detailView.frame = self.constaintDetailFrame!
-            self.detailView.setTranslatesAutoresizingMaskIntoConstraints(false)
         })
-        detailView.setTranslatesAutoresizingMaskIntoConstraints(false)
     }
     //MARK: - Textfield delegate.
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            var frame = self.detailView.frame;
-            frame.origin.y -= 216
-            self.detailView.frame = frame
-        })
+        if(constaintDetailFrame?.height == 0 && constaintDetailFrame?.width == 0) {
+            //constaintDetailFrame = detailView.frame
+        }
         return true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        detailView.layoutIfNeeded()
-        detailView.setTranslatesAutoresizingMaskIntoConstraints(true)
-        keyWordTextFiled.resignFirstResponder()
-        //detailView.frame = constaintDetailFrame!
-        detailView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
         return true
     }
     
@@ -323,3 +311,5 @@ extension AddNewVC {
         
     }
 }
+
+
