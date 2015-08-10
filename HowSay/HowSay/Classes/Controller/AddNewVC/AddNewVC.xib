@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddNewVC" customModule="HowSay" customModuleProvider="target">
             <connections>
+                <outlet property="contrainViewDetailHeight" destination="Lsg-r0-Tyu" id="KGZ-ft-PRN"/>
                 <outlet property="detailView" destination="KsE-uS-cBr" id="fxe-9p-BVF"/>
                 <outlet property="doneButton" destination="dtw-AY-E3v" id="uq3-Wl-DfY"/>
                 <outlet property="keyWordTextFiled" destination="chB-im-xbu" id="cGh-tw-mMe"/>
@@ -25,22 +26,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="x8m-9J-I3p">
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEg-oL-a0p" userLabel="ViewTopBar">
-                    <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="rtG-EP-S9b">
-                            <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="rtG-EP-S9b" firstAttribute="leading" secondItem="YEg-oL-a0p" secondAttribute="leading" id="5TF-uk-KjF"/>
-                        <constraint firstAttribute="bottom" secondItem="rtG-EP-S9b" secondAttribute="bottom" id="Gc3-KJ-St5"/>
-                        <constraint firstItem="rtG-EP-S9b" firstAttribute="top" secondItem="YEg-oL-a0p" secondAttribute="top" id="KQ7-Uc-hDz"/>
-                        <constraint firstAttribute="width" secondItem="YEg-oL-a0p" secondAttribute="height" multiplier="142:21" id="KzY-xz-fIl"/>
-                        <constraint firstAttribute="trailing" secondItem="rtG-EP-S9b" secondAttribute="trailing" id="Z9F-G4-MQQ"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KsE-uS-cBr" userLabel="ViewDetail">
                     <rect key="frame" x="0.0" y="84" width="568" height="236"/>
                     <subviews>
@@ -139,6 +124,22 @@
                         <constraint firstAttribute="bottom" secondItem="4j4-WT-eqP" secondAttribute="bottom" constant="8" id="smD-3B-xLT"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YEg-oL-a0p" userLabel="ViewTopBar">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_top" translatesAutoresizingMaskIntoConstraints="NO" id="rtG-EP-S9b">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="84"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="rtG-EP-S9b" firstAttribute="leading" secondItem="YEg-oL-a0p" secondAttribute="leading" id="5TF-uk-KjF"/>
+                        <constraint firstAttribute="bottom" secondItem="rtG-EP-S9b" secondAttribute="bottom" id="Gc3-KJ-St5"/>
+                        <constraint firstItem="rtG-EP-S9b" firstAttribute="top" secondItem="YEg-oL-a0p" secondAttribute="top" id="KQ7-Uc-hDz"/>
+                        <constraint firstAttribute="width" secondItem="YEg-oL-a0p" secondAttribute="height" multiplier="142:21" id="KzY-xz-fIl"/>
+                        <constraint firstAttribute="trailing" secondItem="rtG-EP-S9b" secondAttribute="trailing" id="Z9F-G4-MQQ"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -156,7 +157,7 @@
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="131" y="213"/>
+            <point key="canvasLocation" x="164" y="213"/>
         </view>
     </objects>
     <resources>
