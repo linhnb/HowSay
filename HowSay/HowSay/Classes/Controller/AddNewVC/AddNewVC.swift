@@ -151,26 +151,14 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
             //2
             let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: managedContext)
             let word = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-            
-            //3
-            //if (keyWordTextFiled.text != nil) {
-                word.setValue(keyWordTextFiled.text, forKey: "keyword")
-            //} else {
-               // word.setValue(" ", forKey: "keyword")
-           // }
-           // if (currentFileNameImage != nil) {
-                word.setValue(currentFileNameImage, forKey: "image")
-           // } else {
-                //word.setValue(" ", forKey: "image")
-           // }
-            //if (currentFileNameRecord != nil) {
-                word.setValue(currentFileNameRecord, forKey: "audio")
-           // } else {
-               // word.setValue(" ", forKey: "audio")
-            //}
+            word.setValue(keyWordTextFiled.text, forKey: "keyword")
+            word.setValue(currentFileNameImage, forKey: "image")
+            word.setValue(currentFileNameRecord, forKey: "audio")
+            word.setValue(NSNumber(integer: 1), forKey: "isDelete")
             
             
-            //word.setValue(chooseImage, forKey: "image")
+            
+           
             //4
             var error: NSError?
             if (!managedContext.save(&error)) {
@@ -222,13 +210,13 @@ class AddNewVC: UIViewController, UITextFieldDelegate, UIImagePickerControllerDe
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if(constaintDetailFrame?.height == 0 && constaintDetailFrame?.width == 0) {
-            //constaintDetailFrame = detailView.frame
+            constaintDetailFrame = detailView.frame
         }
         return true
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
+        self.view.endEditing(true)
         return true
     }
     
