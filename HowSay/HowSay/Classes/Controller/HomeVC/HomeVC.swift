@@ -284,7 +284,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             for (j = 0; j < wordManagedObjects.count; j++) {
                 let word =  self.parseDataFromObject(item: wordManagedObjects[j] )
                 if( (wordDelete.keyword == word.keyword) && (wordDelete.image == word.image) && (word.audio == wordDelete.audio) && (wordDelete.isDelete == 1 )) {
-                    managedContext.deleteObject(wordManagedObjects[i])
+                    managedContext.deleteObject(wordManagedObjects[j])
                     var savingError: NSError?
                     if managedContext.save(&savingError){
                         println("Successfully saved the context")
