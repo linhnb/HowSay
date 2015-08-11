@@ -3,9 +3,10 @@
     <entity name="Word" syncable="YES">
         <attribute name="audio" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDelete" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="keyword" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Word" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Word" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

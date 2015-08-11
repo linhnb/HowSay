@@ -99,6 +99,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         wordSave.setValue(word.keyword, forKey: "keyword")
         wordSave.setValue(word.image, forKey: "image")
         wordSave.setValue(word.audio, forKey: "audio")
+        wordSave.setValue(word.isDelete, forKey: "isDelete")
         //4
         var error: NSError?
         if (!managedContext.save(&error)) {
@@ -120,9 +121,10 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 word.keyword =  keyWords[key] as! String
                 word.image = images[key] as! String
                 word.audio = audios[key] as! String
-               //word.isDelete = true
+                word.isDelete = 0
                 self.saveBasicData(word: word)
             }
+            
         } else {
             
         }
@@ -153,12 +155,12 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func parseDataFromArray (arrayWord: NSArray) {
-        wordsTemp.removeAll(keepCapacity: true)
+        words.removeAll(keepCapacity: true)
         for item in arrayWord {
             var keyWord = ""
             var image = ""
             var audio = ""
-            var isDelete = true
+            var isDelete: NSInteger =  NSInteger()
             if (item.valueForKey("keyword") != nil) {
                 keyWord = item.valueForKey("keyword") as! String
             }
@@ -171,9 +173,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 audio = item.valueForKey("audio") as! String
             }
             
-//            if (item.valueForKey("isDelete") != nil){
-//                isDelete = item.valueForKey("iDelete") as! Bool
-//            }
+            if (item.valueForKey("isDelete") != nil){
+                isDelete = item.valueForKey("isDelete") as! NSInteger
+            }
             
             //let audioData: NSData = item.valueForKey("audio") as! NSData
             
@@ -181,10 +183,14 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             word.keyword = keyWord
             word.image = image//UIImage(data: imageData)!
             word.audio = audio
-            wordsTemp.append(word)
+            word.isDelete  = isDelete
+            words.append(word)
         }
         for wordElement in wordsTemp {
-            words.append(wordElement)
+           // if (!contains(words, wordElement)){
+                words.append(wordElement)
+            //}
+            
         }
     }
     
@@ -194,6 +200,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var keyWord = ""
         var image = ""
         var audio = ""
+        var isDelete = NSInteger()
         if (item.valueForKey("keyword") != nil) {
             keyWord = item.valueForKey("keyword") as! String
         }
@@ -202,14 +209,18 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             image = item.valueForKey("image") as! String
         }
         
-        if (item.valueForKey("audio") != nil){
+        if (item.valueForKey("audio") != nil) {
             audio = item.valueForKey("audio") as! String
+        }
+        if (item.valueForKey("isDelete") != nil) {
+            isDelete = item.valueForKey("isDelete") as! NSInteger
         }
         //let audioData: NSData = item.valueForKey("audio") as! NSData
         
         word.keyword = keyWord
         word.image = image//UIImage(data: imageData)!
         word.audio = audio
+        word.isDelete = isDelete
         return word
     }
     override func didReceiveMemoryWarning() {
@@ -272,7 +283,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             var j = 0
             for (j = 0; j < wordManagedObjects.count; j++) {
                 let word =  self.parseDataFromObject(item: wordManagedObjects[j] )
-                if( (wordDelete.keyword == word.keyword) && (wordDelete.image == word.image) && (word.audio == wordDelete.audio)) {
+                if( (wordDelete.keyword == word.keyword) && (wordDelete.image == word.image) && (word.audio == wordDelete.audio) && (wordDelete.isDelete == 1 )) {
                     managedContext.deleteObject(wordManagedObjects[i])
                     var savingError: NSError?
                     if managedContext.save(&savingError){
