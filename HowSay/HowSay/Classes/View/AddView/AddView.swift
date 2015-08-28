@@ -102,6 +102,7 @@ class AddView: UIView, UIImagePickerControllerDelegate, UINavigationControllerDe
             word.setValue(keyWordTextField.text, forKey: "keyword")
             word.setValue(currentFileNameImage, forKey: "image")
             word.setValue(currentFileNameRecord, forKey: "audio")
+            word.setValue(NSNumber(integer: 1), forKey: "isDelete")
             
             //4
             var error: NSError?

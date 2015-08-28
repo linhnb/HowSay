@@ -26,6 +26,8 @@ import AVFoundation
     @IBOutlet weak var viewContent: UIView!
     var position: Int!
     
+    var isAutoPlay = true;
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,15 @@ import AVFoundation
     }
     func playerDidFinishPlaying() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        // next position
+        position = (position == listAudio.count-1) ? 0 : position + 1
+
+        // scroll
+        scrollContent.setContentOffset(CGPointMake(scrollContent.frame.size.width * (CGFloat)(position), 0), animated: true)
+        
+        
+        
         playButton.selected = false
         if(repeatButton.selected == true) {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "delay", userInfo: nil, repeats: false)
@@ -96,10 +107,14 @@ import AVFoundation
         }
     }
     @IBAction func playTouch(sender: AnyObject) {
-        playButton.selected = !playButton.selected
         
         print("Play Audio \n")
-        let audioString = listAudio[position]
+        playAudio(position);
+    }
+    
+    func playAudio(index : Int) {
+        playButton.selected = !playButton.selected
+        let audioString = listAudio[index]
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
         if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
@@ -114,7 +129,9 @@ import AVFoundation
                 }
             }
         }
+        
     }
+    
     @IBAction func nextTouch(sender: AnyObject) {
         print("next touch")
         preButton.hidden = false
@@ -132,16 +149,21 @@ import AVFoundation
     }
     @IBAction func repeatTouch(sender: AnyObject) {
         repeatButton.selected = !repeatButton.selected
-        if(repeatButton.selected == false) {
-            nextButton.hidden = false
-            preButton.hidden = false
-        } else {
-            nextButton.hidden = true
-            preButton.hidden = true
-            
-        }
+        isAutoPlay = !isAutoPlay;
+        
+//        if(repeatButton.selected == false) {
+//            nextButton.hidden = false
+//            preButton.hidden = false
+//        } else {
+//            nextButton.hidden = true
+//            preButton.hidden = true
+//            
+//        }
     }
     @IBAction func backTouch(sender: AnyObject) {
+        
+        isAutoPlay = false;
+        
         let home = HomeVC(nibName: "HomeVC", bundle: nil)
         self.navigationController?.pushViewController(home, animated: false)
         //self.navigationController?.popViewControllerAnimated(true)
@@ -168,6 +190,13 @@ import AVFoundation
         if (position >= 1 && position <= listSelecteds.count - 2) {
             preButton.hidden = false
             nextButton.hidden = false
+        }
+        
+    }
+    
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        if isAutoPlay {
+            playAudio(position)
         }
     }
 }

@@ -36,6 +36,8 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
     var player: AVPlayer!
     var position: Int!
     
+    var isAutoPlay = true;
+    
     
     override func awakeFromNib() {
         position = 0
@@ -71,12 +73,14 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
     
     @IBAction func touchRepeat(sender: AnyObject) {
         repeatButton.selected = !repeatButton.selected
-        if(repeatButton.selected == false) {
-            nextButton.hidden = false
-        } else {
-            nextButton.hidden = true
-            
-        }
+        isAutoPlay = !isAutoPlay;
+        
+//        if(repeatButton.selected == false) {
+//            nextButton.hidden = false
+//        } else {
+//            nextButton.hidden = true
+//            
+//        }
     }
     
     @IBAction func touchPreview(sender: AnyObject) {
@@ -98,10 +102,14 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
     
     @IBAction func touchPlay(sender: AnyObject) {
         self.delegate?.playDetailViewDelegateEnableDismiss(flag: false)
-        playButton.selected = !playButton.selected
         
         print("Play Audio \n")
-        let audioString = listAudio[position]
+        playAudio(position);
+    }
+    
+    func playAudio(index : Int) {
+        playButton.selected = !playButton.selected
+        let audioString = listAudio[index]
         let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
         let nsUserDomainMask    = NSSearchPathDomainMask.UserDomainMask
         if let paths            = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory,nsUserDomainMask, true) {
@@ -116,6 +124,7 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
                 }
             }
         }
+        
     }
 
     @IBAction func touchNext(sender: AnyObject) {
@@ -133,6 +142,14 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
     
     func playerDidFinishPlaying() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        // next position
+        position = (position == listAudio.count-1) ? 0 : position + 1
+        
+        // scroll
+        scrollContent.setContentOffset(CGPointMake(scrollContent.frame.size.width * (CGFloat)(position), 0), animated: true)
+        
+        
         playButton.selected = false
         if(repeatButton.selected == true) {
             NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "delay", userInfo: nil, repeats: false)
@@ -159,6 +176,12 @@ class PlayDetailView: UIView, UIScrollViewDelegate {
         if (position >= 1 && position <= listSelecteds.count - 2) {
             preButton.hidden = false
             nextButton.hidden = false
+        }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        if isAutoPlay {
+            playAudio(position)
         }
     }
 

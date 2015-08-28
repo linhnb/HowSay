@@ -345,6 +345,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 addView.hidden = true
                 playDetailView.hidden = true
                 coverView.hidden = true
+                playDetailView.isAutoPlay = false
                 
                 listSelecteds.removeAll(keepCapacity: false)
                 homeCollectionView.reloadData()
