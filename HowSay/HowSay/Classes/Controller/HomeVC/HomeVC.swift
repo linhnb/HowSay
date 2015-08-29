@@ -305,6 +305,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             
         }
         
+        listSelecteds.removeAll(keepCapacity: false)
+        homeCollectionView.reloadData()
+        
     }
     
     //MARK:- addNewCell Delegate
